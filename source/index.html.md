@@ -2,27 +2,78 @@
 title: API Reference
 
 language_tabs:
-  - shell
-  - ruby
-  - python
+
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - tips
   - errors
 
 search: true
 ---
 
-# Introduction
+# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+| AIVA is | |
+|:---|---|
+| general-purpose | An app interface, AI assistant, anything! |
+| cross-platform | Slack, Telegram, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
+| multi-language | Runs scripts among Node.js, Python3, Ruby, etc. |
+| hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
+| powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+AIVA is based on a theoretical interface [HTMI](./docs/HTMI.md) and a brain [CGKB](./docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
+
+
+
+## Installation
+
+Clone this repo:
+
+```shell
+git clone https://github.com/kengz/aiva.git
+```
+
+Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digital Ocean](https://www.digitalocean.com), with this automatic [setup script](https://github.com/kengz/mac_setup). Optionally for manual setup, see [Dependencies](#dependencies).
+
+
+
+## Setup, Run
+
+### <a name="setup"></a>One-time Setup
+- **install dependencies**: 
+
+```shell
+npm run gi
+```
+
+- **setup keys**: update `.env`, `bin/.key-aiva` (production), `bin/.key-aivadev` (development).
+
+Check [**Setup tips**](#setup-tips) for tips.
+
+<aside class="notice">
+If you prefer a different bot name, replace "aiva" from the <code>bin/.keys-</code> and in <code>package.json</code>.
+</aside>
+
+### <a name="run"></a>Run
+- **run**: `npm start`; append `--bot=<bot-name>` to run the non-default bots.
+
+
+```shell
+# alternative commands
+npm stop # stop all running bots
+npm run debug # run aivadev, log to terminal
+npm run debug --bot=aiva # debug aiva
+npm run shell # to dev, run aivadev with shell-adapter
+npm test # run unit tests
+forever list # see the list of bots running
+```
+
 
 # Authentication
 
