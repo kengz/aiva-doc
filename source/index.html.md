@@ -9,7 +9,9 @@ toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - tips
+  - TIPS
+  - HTMI
+  - CGKB
   - errors
 
 search: true
