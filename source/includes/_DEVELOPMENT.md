@@ -7,17 +7,27 @@ You can focus on writing your app/module backend. When done, plugging it into AI
 
 ## Polyglot Environment
 
-Unite we stand. Each language has its strengths, for example Python for machine learning, Node.js for web. AIVA allows to let them work together using `Socket.io`. You can write in any language and add its `Socket.io` client if it doesn't already exist.
+**Unite we stand**. Each language has its strengths, for example Python for machine learning, Node.js for web. With a built in `Socket.io` client logic, AIVA allows you to write in multiple coordinating languages.
 
-For now we have `/lib/client.{js, py, rb}`. Feel free to add more through pull request!
+For now we have `/lib/client.{js, py, rb}`. Feel free to add more `Socket.io` clients through pull request!
 
 
-**To run socket.io** during development, import and run `lib/io_start` in a js script (e.g. your interface). This will start the server polyglot clients, and initialize all the modules in `/lib/<lang>/`. When done, it returns a promise for chaining.
+For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
 
-This modularity of socket.io allows for **quick dev**. You can start only the server and clients by running `node lib/io_start.js`, then start testing your script with a mini js client:
+```shell
+# shell: start the polyglot server
+node lib/io_start
+```
 
+<aside class="warning">
+This is automatically with `npm run`, so don't manual-run it before starting the bot.
+</aside>
+
+
+then import a `lib/client.js` to test a local feature from the `js` interface. Example in quickly testing the translate feature from `python`.
 
 ```javascript
+// js: interface scripts
 var client = require('../client.js')
 global.gPass = client.gPass
 
@@ -26,6 +36,7 @@ global.gPass({
   to: 'ai.py',
   intent: 'nlp.translate'
 }).then(console.log)
+// hello friends
 ```
 
 
@@ -38,7 +49,10 @@ Development comes down to:
 - **module**: callable low level functions, lives in `/lib/<lang>/<module>.<lang>`.
 - **interface**: high level user interface to call the module functions, lives in `/scripts/<interface>.js`
 
-It is vital to follow the directory structure to expose them to the socket.io; deeper nested modules will not be callable via socket.io.
+
+<aside class="notice">
+It is vital to follow the directory structure to expose them to socket.io as it calls from <code>lib/&lt;lang&gt;/*</code> but not deeper. You can import nested modules from there and call it with dot-path. More on this later.
+</aside>
 
 You write a module in `<lang>`, how do you call it from the interface? There are 3 cases depending on the number of `<lang>` (including `js` for interface) involved.
 
@@ -56,19 +70,23 @@ e.g. `<lang> = js, py`.
 2. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the JSON `msg`
 
 ```javascript
-// scripts/hello_py.js
+// js: scripts/hello_py.js
 {
-  input: 'Hello from user.', // input for module function
-  to: 'hello.py', // the target module
-  intent: 'sayHi' // the module function to call with input
+  'input': 'Hello from user.', // input for module function
+  'to': 'hello.py', // the target module
+  'intent': 'sayHi' // the module function to call with input
   // add more as needed
 }
 ```
 
+<aside class="notice">
+JSON payload standard here
+</aside>
+
 3. Ensure the called module function returns a reply JSON to the interface:
 
 ```python
-# lib/py/hello.py
+# py: lib/py/hello.py
 reply = {
   'output': foo(msg.get('input')), # output to interface
   'to': msg.get('from'), # is 'client.js' for interface
