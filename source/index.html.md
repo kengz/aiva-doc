@@ -7,7 +7,9 @@ toc_footers:
   - <a href='https://github.com/kengz/aiva'>AIVA Github</a>
 
 includes:
+  - FEATURES
   - DEVELOPMENT
+  - MODULES
   - TIPS
   - ADAPTERS
 
@@ -21,8 +23,8 @@ search: true
 | AIVA is | |
 |:---|---|
 | general-purpose | An app interface, AI assistant, anything! |
-| cross-platform | Slack, Telegram, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
-| multi-language | Runs scripts among Node.js, Python3, Ruby, etc. |
+| cross-platform | Slack, Telegram, Facebook, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
+| multi-language | Run and pass data among Node.js, Python3, Ruby, etc. |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
@@ -42,9 +44,9 @@ Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digi
 
 
 
-## Setup, Run
+## <a name="setup"></a>Setup, Run
 
-### <a name="setup"></a>One-time Setup
+### <a name="one-time-setup"></a>One-time Setup
 - **install dependencies**: 
 
 ```shell

@@ -1,4 +1,4 @@
-# Development Guide
+# <a name="dev-guide"></a>Development Guide
 
 AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so *developers can focus on things that matter*.
 
@@ -9,7 +9,7 @@ You can focus on writing your app/module backend. When done, plugging it into AI
 
 **Unite we stand**. Each language has its strengths, for example Python for machine learning, Node.js for web. With a built in `Socket.io` client logic, AIVA allows you to write in multiple coordinating languages.
 
-For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client for more langauges through pull request!
+For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client for more languages through pull request!
 
 
 >For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
