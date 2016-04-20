@@ -9,7 +9,7 @@ You can focus on writing your app/module backend. When done, plugging it into AI
 
 **Unite we stand**. Each language has its strengths, for example Python for machine learning, Node.js for web. With a built in `Socket.io` client logic, AIVA allows you to write in multiple coordinating languages.
 
-For now we have `/lib/client.{js, py, rb}`. Feel free to add more `Socket.io` clients through pull request!
+For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client for more langauges through pull request!
 
 
 For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
@@ -20,11 +20,11 @@ node lib/io_start
 ```
 
 <aside class="warning">
-This is automatically with `npm run`, so don't manual-run it before starting the bot.
+This is automatically with <code>npm run</code>, so don't manual-run it before starting the bot.
 </aside>
 
 
-then import a `lib/client.js` to test a local feature from the `js` interface. Example in quickly testing the translate feature from `python`.
+then import a `lib/client.js` to test a local feature from the `js` interface. Example: quickly testing the translate function in `python`.
 
 ```javascript
 // js: interface scripts
@@ -60,30 +60,29 @@ You write a module in `<lang>`, how do you call it from the interface? There are
 
 `<lang> = js`. If your module is in `js`, just `require` it directly in the interface script.
 
-Since the AIVA is based on hubot, here's a interface reference: [hubot scripting guide](https://github.com/github/hubot/blob/master/docs/scripting.md). You can also [load hubot scripts](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) written by others.
+<aside class="notice">
+Since the AIVA is based on hubot, you can refer to <a href="https://github.com/github/hubot/blob/master/docs/scripting.md">hubot scripting guide</a>. You can also <a href="https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading">load hubot scripts</a> written by others.
+</aside>
 
 ### Case: 2 `<lang>`s
 
 e.g. `<lang> = js, py`. 
 
-1. You write a module [`lib/py/hello.py`](./lib/py/hello.py)
-2. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the JSON `msg`
+1\. You write a module [`lib/py/hello.py`](./lib/py/hello.py)
+
+2\. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the JSON `msg`
 
 ```javascript
 // js: scripts/hello_py.js
-{
-  'input': 'Hello from user.', // input for module function
-  'to': 'hello.py', // the target module
-  'intent': 'sayHi' // the module function to call with input
+msg = {
+  input: 'Hello from user.', // input for module function
+  to: 'hello.py', // the target module
+  intent: 'sayHi' // the module function to call with input
   // add more as needed
 }
 ```
 
-<aside class="notice">
-JSON payload standard here
-</aside>
-
-3. Ensure the called module function returns a reply JSON to the interface:
+3\. Ensure the called module function returns a reply JSON to the interface:
 
 ```python
 # py: lib/py/hello.py
@@ -102,12 +101,14 @@ The JSON fields above are required for their purposes. `global.gPass` used by th
 
 e.g. `<lang> = js, py, rb`
 
-1. You write modules in `py, rb` [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
-2. Call one (`py` in this example) from the interface [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js) as described earlier.
-3. [`lib/py/hello_rb.py`](./lib/py/hello_rb.py) passes it further to the `rb` module, by returning the JSON `msg`
+1\. You write modules in `py, rb` [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
+
+2\. Call one (`py` in this example) from the interface [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js) as described earlier.
+
+3\. [`lib/py/hello_rb.py`](./lib/py/hello_rb.py) passes it further to the `rb` module, by returning the JSON `msg`
 
 ```python
-# lib/py/hello_rb.py
+# py: lib/py/hello_rb.py
 reply = {
   'input': 'Hello from Python from js.', # input for rb module function
   'to': 'Hello.rb', # the target module
@@ -116,10 +117,15 @@ reply = {
   'hash': msg.get('hash'), # pass on callback hash for interface
 }
 ```
-4. [`lib/rb/Hello.rb`](./lib/rb/Hello.rb) ensure the final module function returns a reply JSON `msg` to the interface. *Note for auto-id, Ruby filename need to be the same as its module name, case-sensitive.*
 
-```rb
-# lib/rb/Hello.rb
+4\. [`lib/rb/Hello.rb`](./lib/rb/Hello.rb) ensure the final module function returns a reply JSON `msg` to the interface. 
+
+<aside class="warning">
+For auto-id, Ruby filename need to be the same as its module name, case-sensitive.
+</aside>
+
+```ruby
+# rb: lib/rb/Hello.rb
 reply = {
   'output' => 'Hello from Ruby.', # output to interface
   'to' => msg['from'], # 'client.js'
@@ -128,7 +134,11 @@ reply = {
 }
 ```
 
->Overall, you need only to ensure your scripts/module functions return the correct JSON `msg`, and we handle the rest for you.
+<aside class="notice">
+Overall, ensure that your functions return the correct JSON `msg`, and we handle the inter-language dataflow logic. See the <a href="#msg-json"><code>msg</code> JSON keys</a>.
+</aside>
+
+
 
 With such pattern, you can chain multiple function calls that bounce among different `<lang>`. Example use case: retrieve data from Ruby on Rails app, pass to Java to run algorithms, then to Python for data analysis, then back to Node.js interface.
 
@@ -139,7 +149,7 @@ With such pattern, you can chain multiple function calls that bounce among diffe
 
 To streamline polyglot development further we've made the `client.<lang>`'s automatically try to compile a proper reply JSON `msg`, using the original `msg` it receives for invoking a function.
 
-What this means is you can call a **module** by its name, and its **function** by specifying the dotpath (if it's nested), then providing a valid `input` format (single argument for now). 
+What this means is you can call a **module** (`to`) by its name, and its **function** (`intent`) by specifying the dotpath (if it's nested), then providing a valid `input` format (single argument for now).
 
 On receiving a `msg`, the `client.<lang>` tries to call the function by passing `msg`. If that throws an exception, it retries by passing `msg.input`. After the function executes and returns the result, `client.<lang>`'s handler will check if the reply is a valid JSON, and if not, will make it into one via `correctJSON(reply, msg)` by extracting the information needed from the received `msg`.
 
@@ -184,15 +194,13 @@ What goes where:
 
 ## How it works: Socket.io logic and standard
 
-### Sample JSON and the required keys for different purposes.
-
->Overall, you need only to ensure your scripts/module functions return the correct JSON `msg`, and we handle the rest for you.
+### <a name="msg-json"></a>`msg` JSON keys for different purposes.
 
 - to call a module's function in `<lang>`: [`scripts/hello_py.js`](./scripts/hello_py.js)
 
 ```javascript
-// scripts/hello_py.js
-{
+// js: scripts/hello_py.js
+msg = {
   input: 'Hello from user.', // input for module function
   to: 'hello.py', // the target module
   intent: 'sayHi' // the module function to call with input
@@ -203,7 +211,7 @@ What goes where:
 - to reply the payload to sender: [`lib/py/hello.py`](./lib/py/hello.py)
 
 ```python
-# lib/py/hello.py
+# py: lib/py/hello.py
 reply = {
   'output': foo(msg.get('input')), # output to interface
   'to': msg.get('from'), # is 'client.js' for interface
@@ -215,7 +223,7 @@ reply = {
 - to pass on payload to other module's function: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py)
 
 ```python
-lib/py/hello_rb.py
+# py: lib/py/hello_rb.py
 reply = {
   'input': 'Hello from Python from js.', # input for rb module function
   'to': 'Hello.rb', # the target module
@@ -224,6 +232,10 @@ reply = {
   'hash': msg.get('hash'), # pass on callback hash for interface
 }
 ```
+
+<aside class="notice">
+Overall, ensure that your functions return the correct JSON `msg`, and we handle the inter-language dataflow logic.
+</aside>
 
 ### Server
 There is a socket.io server that extends Hubot's Express.js server: [`lib/io_server.js`](./lib/io_server.js). All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.

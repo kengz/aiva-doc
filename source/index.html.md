@@ -3,7 +3,6 @@ title: API Reference
 
 language_tabs:
 
-
 toc_footers:
   - <a href='https://github.com/kengz/aiva'>AIVA Github</a>
 
