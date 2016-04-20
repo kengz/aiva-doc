@@ -12,7 +12,7 @@ You can focus on writing your app/module backend. When done, plugging it into AI
 For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client for more langauges through pull request!
 
 
-For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
+>For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
 
 ```shell
 # shell: start the polyglot server
@@ -24,7 +24,7 @@ This is automatically with <code>npm run</code>, so don't manual-run it before s
 </aside>
 
 
-then import a `lib/client.js` to test a local feature from the `js` interface. Example: quickly testing the translate function in `python`.
+>then import a `lib/client.js` to test a local feature from the `js` interface. Example: quickly testing the translate function in `python`.
 
 ```javascript
 // js: interface scripts
@@ -42,7 +42,9 @@ global.gPass({
 
 ## <a name="polyglot-dev"></a>Polyglot Development
 
-The interface is `js`, and it's pretty easy to write. In fact, once we finish the RNN NLP feature for auto-parsing user sentences we wouldn't even need to write an interface; at least that's the goal.
+The quickest way to get into dev is to look at the examples in `lib/<lang>/` and `scripts/`.
+
+The interface is `js`, and it's pretty easy to write. the module can be written in any language if it has a Socket.io client.
 
 Development comes down to:
 
@@ -51,7 +53,7 @@ Development comes down to:
 
 
 <aside class="notice">
-It is vital to follow the directory structure to expose them to socket.io as it calls from <code>lib/&lt;lang&gt;/*</code> but not deeper. You can import nested modules from there and call it with dot-path. More on this later.
+It is vital to follow the <a href="#project-dir">directory structure</a> to expose them to socket.io as it calls from <code>lib/&lt;lang&gt;/*</code> but not deeper. You can import nested modules from there and call it with dot-path. More on this later.
 </aside>
 
 You write a module in `<lang>`, how do you call it from the interface? There are 3 cases depending on the number of `<lang>` (including `js` for interface) involved.
@@ -156,40 +158,16 @@ On receiving a `msg`, the `client.<lang>` tries to call the function by passing 
 Lastly, after the `js` `global.gPass` sends out a `msg`, the final reply directed at it should contain an `output` field, as good dev pattern and reliability in promise-resolution. When `global.gPass(msg)` gets its reply and its promise resolved, you will see `hasher.handle invoking cb` in stdout.
 
 
+<aside class="notice">
+In fact, once we finish the NLP auto-parsing feature for user sentences, we wouldn't even need to write an interface; Still working on it.
+</aside>
+
+
 ## Unit Tests
 
 This repo includes only unit tests for `js` **modules** and **interface** scripts using `mocha`, and runs with `npm test`. Note that tests should be for systems, thus the tests for AI models are excluded.
 
 For the module of other `<lang>`, you may add any unit testing framework of your choice.
-
-
-## What to use for what
-
-Some of the best/recommended libraries for things:
-
-- **NLP**: StanfordNLP (java), TextBlob(py), Natural(js), Watson, Indico.io, Wordnet
-- **Machine learning**: scikit-learn(py), pandas(py), skflow(py), Google APIs
-- **Deep learning**: Tensorflow(py), Skflow(py), Torch(lua), Theano(py), leaf(rust) , deeplearning4j(java)
-- **Knowledge/concept base**: ConceptNet, Wordnet, Google graph
-- Whatever you do best in your favorite languages
-
-
-## Project structure
-
-What goes where:
-
-| Folder/File | Purpose |
-|:---|---|
-| `bin/` | bot keys, binaries, bash setup scripts. |
-| `lib/<lang>/` | Module scripts, grouped by language, callable via socket.io. See [Polyglot Development](#polyglot-dev). |
-| `lib/import_clients.<ext>` | Import all scripts from `lib/<lang>/` and expose them to socket.io for cross-language communication. |
-| `lib/io_start.js` | socket.io server and client logic for cross-language communication. |
-| `logs` | Logs from bot for debugging and healthcheck. |
-| `scripts` | The `node.js` user interface for the `lib/` modules. |
-| `scripts/_init.js` | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
-| `test` | Unit tests; uses Mocha. |
-| `.env` | Non-bot-specific environment variables. |
-| `external-scripts.json` | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them in here and `package.json`. | Specifies project dependencies and command shortcuts with npm. |
 
 
 ## How it works: Socket.io logic and standard
@@ -233,20 +211,67 @@ reply = {
 }
 ```
 
+### `msg` JSON keys
+
+| key | details |
+|:---|---|
+| input | input to the target module function. |
+| to | filename of the target module in `lib/<lang>`. |
+| intent | function of the target module to call. Call nested function with dot-path, e.g. `nlp.translate`. |
+| output | output from the target function to reply with. |
+| from | ID of the script sending the `msg`. |
+| hash | auto-generated callback-promise hash from `client.js` to callback interface. |
+
+Of course, add additional keys to the JSON as needed by your function.
+
 <aside class="notice">
 Overall, ensure that your functions return the correct JSON `msg`, and we handle the inter-language dataflow logic.
 </aside>
 
+<aside class="success">
+Socket.io can send deeply nested JSON with standard data type.
+</aside>
+
+
 ### Server
 There is a socket.io server that extends Hubot's Express.js server: [`lib/io_server.js`](./lib/io_server.js). All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
+
+>For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
+
+```shell
+# shell: start the polyglot server
+node lib/io_start
+```
+
+<aside class="warning">
+This is automatically with <code>npm run</code>, so don't manual-run it before starting the bot.
+</aside>
 
 
 ### Clients
 For each language, there is a socket.io client that imports all modules of its language within `lib`. When server sends a `msg` to it, the client's `handle` will find the module and its function using `msg.to, msg.intent` respectively, then call the function with `msg` as the argument. If it gets a valid reply `msg`, it will pass it on to the server.
 
+
+>then import a `lib/client.js` to test a local feature from the `js` interface. Example: quickly testing the translate function in `python`.
+
+```javascript
+// js: interface scripts
+var client = require('../client.js')
+global.gPass = client.gPass
+
+global.gPass({
+  input: "hola amigos",
+  to: 'ai.py',
+  intent: 'nlp.translate'
+}).then(console.log)
+// hello friends
+```
+
 >Note due to how a module is called using `msg.to, msg.intent`, you must ensure that the functions are named properly, and `Ruby`'s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. `lib/rb/Hello.rb` for the `Hello` module.
 
->To add support for other language, say `Java`, you can add a `lib/client.java` by following patterns in `lib/client.{py, rb}`, and adding the `commands` in `lib/io_client.js`*
+<aside class="notice">
+To add support for other language, say Java, you can add a <code>lib/client.java</code> by following patterns in <code>lib/client.{py, rb}</code>, and starting them in <code>lib/io_client.js</code>. Please create a pull request if you do so :)
+</aside>
 
 
 ### Entry point
@@ -267,4 +292,32 @@ The msg goes through socket.io as `js(interface script) -> js(io_server.js) -> <
 
 For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -> js(lib/io_server.js) -> py(client.py), call py function -> js(io_server.js) -> js(client.js) call Promise.resolve -> js(interface script) send back to user`
 
+
+## <a name="project-dir"></a>Project directory structure
+
+What goes where:
+
+| Folder/File | Purpose |
+|:---|---|
+| bin/ | bot keys, binaries, bash setup scripts. |
+| lib/&lt;lang&gt;/ | Module scripts, grouped by language, callable via socket.io. See [Polyglot Development](#polyglot-dev). |
+| lib/client.&lt;lang&gt; | Import all scripts from `lib/<lang>/` and expose them to socket.io for cross-language communication. |
+| lib/io_start.js | socket.io server and client logic for cross-language communication. |
+| logs | Logs from bot for debugging and healthcheck. |
+| scripts | The `node.js` user interface for the `lib/` modules. |
+| scripts/_init.js | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
+| test | Unit tests; uses Mocha. |
+| .env | Non-bot-specific environment variables. |
+| external-scripts.json | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them in here and `package.json`. | Specifies project dependencies and command shortcuts with npm. |
+
+
+## What to use for what
+
+Some of the best/recommended libraries for things:
+
+- **NLP**: StanfordNLP (java), TextBlob(py), Natural(js), Watson, Indico.io, Wordnet
+- **Machine learning**: scikit-learn(py), pandas(py), skflow(py), Google APIs
+- **Deep learning**: Tensorflow(py), Skflow(py), Torch(lua), Theano(py), leaf(rust) , deeplearning4j(java)
+- **Knowledge/concept base**: ConceptNet, Wordnet, Google graph
+- Whatever you do best in your favorite languages
 
