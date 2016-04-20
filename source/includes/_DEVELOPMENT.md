@@ -70,9 +70,9 @@ Since the AIVA is based on hubot, you can refer to <a href="https://github.com/g
 
 e.g. `<lang> = js, py`. 
 
-1\. You write a module [`lib/py/hello.py`](./lib/py/hello.py)
+1\. You write a module <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a>
 
-2\. Call it from the interface [`scripts/hello_py.js`](./scripts/hello_py.js) using the exposed `global.gPass` function, with the JSON `msg`
+2\. Call it from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> using the exposed `global.gPass` function, with the JSON `msg`
 
 ```javascript
 // js: scripts/hello_py.js
@@ -103,11 +103,11 @@ The JSON fields above are required for their purposes. `global.gPass` used by th
 
 e.g. `<lang> = js, py, rb`
 
-1\. You write modules in `py, rb` [`lib/py/hello_rb.py`](./lib/py/hello_rb.py), [`lib/rb/Hello.rb`](./lib/rb/Hello.rb)
+1\. You write modules in `py, rb` <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a>, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a>
 
-2\. Call one (`py` in this example) from the interface [`scripts/hello_py_rb.js`](./scripts/hello_py_rb.js) as described earlier.
+2\. Call one (`py` in this example) from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py_rb.js" target="_blank"><code>scripts/hello_py_rb.js</code></a> as described earlier.
 
-3\. [`lib/py/hello_rb.py`](./lib/py/hello_rb.py) passes it further to the `rb` module, by returning the JSON `msg`
+3\. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a> passes it further to the `rb` module, by returning the JSON `msg`
 
 ```python
 # py: lib/py/hello_rb.py
@@ -120,7 +120,7 @@ reply = {
 }
 ```
 
-4\. [`lib/rb/Hello.rb`](./lib/rb/Hello.rb) ensure the final module function returns a reply JSON `msg` to the interface. 
+4\. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a> ensure the final module function returns a reply JSON `msg` to the interface. 
 
 <aside class="warning">
 For auto-id, Ruby filename need to be the same as its module name, case-sensitive.
@@ -174,7 +174,7 @@ For the module of other `<lang>`, you may add any unit testing framework of your
 
 ### <a name="msg-json"></a>`msg` JSON keys for different purposes.
 
-- to call a module's function in `<lang>`: [`scripts/hello_py.js`](./scripts/hello_py.js)
+- to call a module's function in `<lang>`: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a>
 
 ```javascript
 // js: scripts/hello_py.js
@@ -186,7 +186,7 @@ msg = {
 }
 ```
 
-- to reply the payload to sender: [`lib/py/hello.py`](./lib/py/hello.py)
+- to reply the payload to sender: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a>
 
 ```python
 # py: lib/py/hello.py
@@ -198,7 +198,7 @@ reply = {
 }
 ```
 
-- to pass on payload to other module's function: [`lib/py/hello_rb.py`](./lib/py/hello_rb.py)
+- to pass on payload to other module's function: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a>
 
 ```python
 # py: lib/py/hello_rb.py
@@ -234,7 +234,7 @@ Socket.io can send deeply nested JSON with standard data type.
 
 
 ### Server
-There is a socket.io server that extends Hubot's Express.js server: [`lib/io_server.js`](./lib/io_server.js). All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
+There is a socket.io server that extends Hubot's Express.js server: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
 
 >For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
 
@@ -281,9 +281,9 @@ The entry point is always a `js` interface script, but luckily we have made it t
 
 Overall, there are 2 ways to connect with `lib` modules:
 
-**global.gPass**: [`scripts/hello_py.js`](./scripts/hello_py.js) This is a global method to pass a `msg`. It generates a `hash` using `lib/hasher.js` with a `Promise`, which is resolved whenever the `js` client receives a valid reply `msg` with same `hash`. This method returns the resolved `Promise` with that `msg` for chaining.
+**global.gPass**: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> This is a global method to pass a `msg`. It generates a `hash` using `lib/hasher.js` with a `Promise`, which is resolved whenever the `js` client receives a valid reply `msg` with same `hash`. This method returns the resolved `Promise` with that `msg` for chaining.
 
-**wrapped global.gPass**: [`scripts/translate.js`](./scripts/translate.js), [`lib/js/nlp.js`](./lib/js/nlp.js) This is similar to above, but the `msg` is properly generated by a `js` lib module, resulting in a much cleaner and safer interface script. The lib module needs to be imported at the top to be used.
+**wrapped global.gPass**: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/nlp.js" target="_blank"><code>lib/js/nlp.js</code></a> This is similar to above, but the `msg` is properly generated by a `js` lib module, resulting in a much cleaner and safer interface script. The lib module needs to be imported at the top to be used.
 
 
 ### Data flow
@@ -315,7 +315,7 @@ What goes where:
 
 Some of the best/recommended libraries for things:
 
-- **NLP**: StanfordNLP (java), TextBlob(py), Natural(js), Watson, Indico.io, Wordnet
+- **NLP**: SpaCy(python), TextBlob(py), Natural(js), StanfordNLP(java), Watson, Indico.io, Wordnet
 - **Machine learning**: scikit-learn(py), pandas(py), skflow(py), Google APIs
 - **Deep learning**: Tensorflow(py), Skflow(py), Torch(lua), Theano(py), leaf(rust) , deeplearning4j(java)
 - **Knowledge/concept base**: ConceptNet, Wordnet, Google graph
