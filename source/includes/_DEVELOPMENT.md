@@ -5,7 +5,7 @@ AIVA is created as an A.I. general purpose interface for developers; it has an (
 You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.
 
 
-## Polyglot Environment
+## <a name="polyglot"></a>Polyglot Environment
 
 **Unite we stand**. Each language has its strengths, for example Python for machine learning, Node.js for web. With a built in `Socket.io` client logic, AIVA allows you to write in multiple coordinating languages.
 
@@ -248,7 +248,7 @@ This is automatically with <code>npm run</code>, so don't manual-run it before s
 </aside>
 
 
-### Clients
+### <a name="clients"></a>Clients
 For each language, there is a socket.io client that imports all modules of its language within `lib`. When server sends a `msg` to it, the client's `handle` will find the module and its function using `msg.to, msg.intent` respectively, then call the function with `msg` as the argument. If it gets a valid reply `msg`, it will pass it on to the server.
 
 
@@ -268,6 +268,8 @@ global.gPass({
 ```
 
 >Note due to how a module is called using `msg.to, msg.intent`, you must ensure that the functions are named properly, and `Ruby`'s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. `lib/rb/Hello.rb` for the `Hello` module.
+
+We now support `node.js, python, ruby`.
 
 <aside class="notice">
 To add support for other language, say Java, you can add a <code>lib/client.java</code> by following patterns in <code>lib/client.{py, rb}</code>, and starting them in <code>lib/io_client.js</code>. Please create a pull request if you do so :)

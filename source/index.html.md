@@ -5,10 +5,11 @@ language_tabs:
 
 toc_footers:
   - <a href='https://github.com/kengz/aiva'>AIVA Github</a>
+  - <a href='https://github.com/kengz/aiva-doc'>AIVA documentation Github</a>
 
 includes:
-  - FEATURES
   - DEVELOPMENT
+  - FEATURES
   - MODULES
   - TIPS
   - ADAPTERS
@@ -25,10 +26,11 @@ search: true
 | general-purpose | An app interface, AI assistant, anything! |
 | cross-platform | Slack, Telegram, Facebook, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
 | multi-language | Run and pass data among Node.js, Python3, Ruby, etc. |
+| built-in AI tools | Tensorflow, skflow, Indico.ml, spaCy, Watson, Google APIs |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
-AIVA is based on a theoretical interface [HTMI](./docs/HTMI.md) and a brain [CGKB](./docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
+AIVA is based on a theoretical interface [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
 
 
 
