@@ -290,9 +290,24 @@ Overall, there are 2 ways to connect with `lib` modules:
 
 ### Data flow
 
-The msg goes through socket.io as `js(interface script) -> js(io_server.js) -> <lang>(client.<lang>) -> js(io_server.js) -> ...(can bound among different <lang> modules) -> js(client.js) -> js(interface script)`
+The msg goes through socket.io as 
 
-For the `hello_py.js` example, the path is `js(scripts/hello_py.js) user input -> js(lib/io_server.js) -> py(client.py), call py function -> js(io_server.js) -> js(client.js) call Promise.resolve -> js(interface script) send back to user`
+- `js(interface script)`
+- `-> js(io_server.js)`
+- `-> <lang>(client.<lang>)`
+- `-> js(io_server.js)`
+- `-> ...(can bound among different <lang> modules)`
+- `-> js(client.js)`
+- `-> js(interface script)`
+
+For the `hello_py.js` example, the path is 
+
+- `js(scripts/hello_py.js) user input`
+- `-> js(lib/io_server.js)`
+- `-> py(client.py), call py function`
+- `-> js(io_server.js)`
+- `-> js(client.js) call Promise.resolve`
+- `-> js(interface script) send back to user`
 
 
 ## <a name="project-dir"></a>Project directory structure
