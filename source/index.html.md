@@ -19,6 +19,10 @@ search: true
 
 # AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/jarvis.svg)](https://gemnasium.com/kengz/jarvis)
 
+<aside class="warning">
+This documentation is still being completed.
+</aside>
+
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
 
 | AIVA is | |

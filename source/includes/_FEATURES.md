@@ -7,6 +7,7 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 |:---|---|
 | [fast setup](#setup2) | yes |
 | [cross-platform](#cross-platform) | implementing |
+| [graph brain](#graph-brain) | improving |
 | [multi-language](#multi-language) | yes |
 | [built-in AI tools](#builtin-ai) | yes |
 
@@ -22,11 +23,26 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 
 The Facebook bot paradigm is "why use multiple apps when you can access them from one bot?". I dare to ask "why talk to the bot from one platform instead of everywhere?"
 
+### Omnipresence
+
 This inspires the *omnipresence* feature: a bot that recognizes who you are, and can continue conversation in any supported platforms. We talk to our friends everywhere, and they don't forget us when we switch apps. Bots should do the same too.
 
 In short: *one brain, multiple interfaces*. AIVA's hubot base allows for generality, and she can tap into multiple platforms by using different [adapters](#adapters). Unlike the original hubot though, she can exist simultaneously on multiple platforms by having several interface instances plugged into the respective adapters, and all share the same brain, which serves as the central memory.
 
 For the list of supported adapters see [adapters](#adapters).
+
+
+## <a name="graph-brain"></a>graph brain
+
+Graph is a very generic and natural way of encoding information, especially for information that doesn't always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.)
+
+Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier.
+
+AIVA uses [`neo4jKB`](https://github.com/kengz/neo4jKB) as the brain - a knowledge base implemented graph with [`neo4j`](http://neo4j.com). Specifically, `neo4jKB` imposes a [KB standard](https://github.com/kengz/neo4jKB#kb-standard-basic) on the graph for proper usage as a knowledge base.
+
+<aside class="notice">
+Neo4jKB is a completed project. Currently it is used for user-recognition and user todo list. AIVA doesn't fully utilize Neo4jKB yet as the AI tools are under development. When done, AIVA will be able to automatically form and extract knowledge from the graph brain.
+</aside>
 
 
 ## <a name="multi-language"></a>multi-language
@@ -62,4 +78,3 @@ The list of AI modules and their respective language:
 These tools are put close together in a [polyglot environment](#polyglot), so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses `date.js` and `spaCy`.
 
 For more in-depth details, see [modules](#modules). Also if find a great ML tool we should include, submit a Pull Request!
-

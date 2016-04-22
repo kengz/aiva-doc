@@ -16,7 +16,7 @@ For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client 
 
 ```shell
 # shell: start the polyglot server
-node lib/io_start
+node lib/io_start.js
 ```
 
 <aside class="warning">
@@ -240,7 +240,7 @@ There is a socket.io server that extends Hubot's Express.js server: <a href="htt
 
 ```shell
 # shell: start the polyglot server
-node lib/io_start
+node lib/io_start.js
 ```
 
 <aside class="warning">
