@@ -36,7 +36,7 @@ For the list of supported adapters see [adapters](#adapters).
 
 Graph is a very generic and natural way of encoding information, especially for information that doesn't always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.)
 
-Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier.
+Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice, and it's data units can be schema-free. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier, schema-free allows knowledge creation on-the-fly.
 
 AIVA uses [`neo4jKB`](https://github.com/kengz/neo4jKB) as the brain - a knowledge base implemented graph with [`neo4j`](http://neo4j.com). Specifically, `neo4jKB` imposes a [KB standard](https://github.com/kengz/neo4jKB#kb-standard-basic) on the graph for proper usage as a knowledge base.
 

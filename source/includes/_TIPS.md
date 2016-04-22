@@ -9,7 +9,7 @@
 - `pip3 install -r requirements.txt`
 - `bundle install`
 
-It's save to run the multiple times; they'll just update. The shell install script is necessary because ... just look at how many things get installed there.
+It's save to run multiple times; they'll just update. The shell install script is necessary because ... just look at how many things get installed there.
 
 ## Custom deployment
 

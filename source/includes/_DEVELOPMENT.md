@@ -20,7 +20,7 @@ node lib/io_start.js
 ```
 
 <aside class="warning">
-This is automatically with <code>npm run</code>, so don't manual-run it before starting the bot.
+This is automatically run with <code>npm run</code>, so don't manual-run it before starting the bot.
 </aside>
 
 
