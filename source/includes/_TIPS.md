@@ -20,12 +20,12 @@ All bot deployment commands are wrapped with `npm` inside `package.json`. For mo
 AIVA uses [`forever`](https://github.com/foreverjs/forever) to keep-alive (with 10 max restarts). `npm start` runs the process in the background, with it stdout logs written to `/logs`. `npm run debug` runs the same thing except it logs stdout to the terminal.
 
 ## Neo4j
-If it's your first installation of `Neo4j`, change the password:
+If it's your first installation of `Neo4j`, the `bin/install` script will reset the default `username:pswd` from `neo4j:neo4j` to `neo4j:0000`, as required for direct usage. This is also consistent with the default `NEO4J_AUTH` in `.env`. If you wish to reset to your own password, use below:
 
 ```shell
 neo4j start
 # change your password
-# note the default username:pswd is neo4j:neo4j
+# note the default username:pswd is neo4j:0000
 curl -X POST -d "password=YOUR_NEW_PASSWORD" -u neo4j:<OLD_PSWD> http://localhost:7474/user/neo4j/password
 # access Neo4j browser GUI
 open http://localhost:7474
