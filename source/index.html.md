@@ -13,6 +13,8 @@ includes:
   - MODULES
   - TIPS
   - ADAPTERS
+  - CHANGELOG
+  - CONTRIBUTING
 
 search: true
 ---
