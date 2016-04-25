@@ -5,6 +5,26 @@ AIVA is created as an A.I. general purpose interface for developers; it has an (
 You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.
 
 
+
+### Production and Development
+
+Per common practice, we distinguish between production and development version, using `NODE_ENV` environment variables. So we generate two sets of keys for two bots:
+
+<aside class="success">
+Use "aiva" for production, "aivadev" for development. They can coexist without system conflicts.
+</aside>
+
+
+```shell
+# alternative commands
+forever list # see the list of bots running
+npm stop # stop all bots
+npm run debug # run aivadev, log to terminal
+npm run debug --bot=aiva # debug aiva
+npm run shell # fast dev, run aivadev with shell-adapter
+npm test # run unit tests
+```
+
 ## <a name="polyglot"></a>Polyglot Environment
 
 **Unite we stand**. Each language has its strengths, for example Python for machine learning, Node.js for web. With a built in `Socket.io` client logic, AIVA allows you to write in multiple coordinating languages.

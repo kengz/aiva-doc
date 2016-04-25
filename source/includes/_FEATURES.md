@@ -10,6 +10,7 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 | [graph brain](#graph-brain) | improving |
 | [multi-language](#multi-language) | yes |
 | [built-in AI tools](#builtin-ai) | yes |
+| [theoretical power](#theoretical) | yes |
 
 
 ## <a name="setup2"></a>fast setup
@@ -78,3 +79,11 @@ The list of AI modules and their respective language:
 These tools are put close together in a [polyglot environment](#polyglot), so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses `date.js` and `spaCy`.
 
 For more in-depth details, see [modules](#modules). Also if find a great ML tool we should include, submit a Pull Request!
+
+
+## <a name="theoretical"></a>theoretical power
+
+AIVA is based on a theoretical interface [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. 
+
+Complete implementation is still underway.
+

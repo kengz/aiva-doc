@@ -23,18 +23,22 @@ search: true
 This documentation is still being completed.
 </aside>
 
-**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers. 
+**AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
 
-| AIVA is | |
+It is a **bot-generalization**: you can implement any features, use it simultaneously on the major platforms, and code in multiple languages.
+
+
+| AIVA is | Details |
 |:---|---|
 | general-purpose | An app interface, AI assistant, anything! |
-| cross-platform | Slack, Telegram, Facebook, IRC, Twilio, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
-| multi-language | Run and pass data among Node.js, Python3, Ruby, etc. |
-| built-in AI tools | Tensorflow, skflow, Indico.ml, spaCy, Watson, Google APIs |
+| cross-platform | Deploy simultaneously on **Slack, Telegram, Facebook**, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
+| multi-language | Code in and coordinate among `Node.js`, `Python`, `Ruby`, etc. |
+| built-in with AI tools | Tensorflow, skflow, Indico.ml, spaCy, Watson, Google APIs |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
-AIVA is based on a theoretical interface [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
+>To see what it means, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.
+
 
 
 
@@ -73,18 +77,11 @@ If you prefer a different bot name, replace "aiva" from the <code>bin/.keys-</co
 
 
 ### <a name="run"></a>Run
-- **run**: `npm start`; append `--bot=<bot-name>` to run the non-default bots.
-
+- **run**: 
 
 ```shell
-# alternative commands
-forever list # see the list of bots running
-npm stop # stop all bots
-npm run debug # run aivadev, log to terminal
-npm run debug --bot=aiva # debug aiva
-npm run shell # fast dev, run aivadev with shell-adapter
-npm test # run unit tests
+npm start # runs aiva
+npm run debug # runs aivadev
 ```
 
-The default hubot adapter is Slack. See [**Adapters**](#adapters) for connecting to different chat platforms.
-
+This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](#adapters) for connecting to different chat platforms.
