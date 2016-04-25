@@ -1,8 +1,10 @@
 # <a name="dev-guide"></a>Development Guide
 
-AIVA is created as an A.I. general purpose interface for developers; it has an (pending) ~~NLP interface and KB brain out of the box~~. We take care of the crucial backend and system, so *developers can focus on things that matter*.
+AIVA is created as an A.I. general purpose interface for developers. You can implement any features, use it simultaneously on the major platforms, and code in multiple languages. This solves the problem that many bots out there are are too specific, often bounded to one chat platform, and can only be developed in one language.
 
-You can focus on writing your app/module backend. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails.
+It has a NLP parser and KB brain out of the box. We take care of the crucial backend and system, so *developers can focus on things that matter*.
+
+Since it is a generic interface, you can focus on writing your app/module. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails to serve it.
 
 
 
@@ -32,7 +34,7 @@ npm test # run unit tests
 For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client for more languages through pull request!
 
 
->For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
+>For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js`.
 
 ```shell
 # shell: start the polyglot server
@@ -44,10 +46,11 @@ This is automatically run with <code>npm run</code>, so don't manual-run it befo
 </aside>
 
 
->then import a `lib/client.js` to test a local feature from the `js` interface. Example: quickly testing the translate function in `python`.
+>then import a `lib/client.js` to test a local feature from the `js` interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in `python`. Uncomment and run it.
+
 
 ```javascript
-// js: interface scripts
+// js: scripts/translate.js
 var client = require('../client.js')
 global.gPass = client.gPass
 
@@ -62,15 +65,14 @@ global.gPass({
 
 ## <a name="polyglot-dev"></a>Polyglot Development
 
-The quickest way to get into dev is to look at the examples in `lib/<lang>/` and `scripts/`.
-
-The interface is `js`, and it's pretty easy to write. the module can be written in any language if it has a Socket.io client.
+The quickest way to get into dev is to look at the examples in `lib/<lang>/` and `scripts/`, which we will go over now.
 
 Development comes down to:
 
 - **module**: callable low level functions, lives in `/lib/<lang>/<module>.<lang>`.
 - **interface**: high level user interface to call the module functions, lives in `/scripts/<interface>.js`
 
+The module can be written in any language if it has a Socket.io client. The interface is in `js`, and that's pretty easy to write.
 
 <aside class="notice">
 It is vital to follow the <a href="#project-dir">directory structure</a> to expose them to socket.io as it calls from <code>lib/&lt;lang&gt;/*</code> but not deeper. You can import nested modules from there and call it with dot-path. More on this later.
@@ -118,6 +120,9 @@ reply = {
 
 The JSON fields above are required for their purposes. `global.gPass` used by the interface will auto-inject and `id` for reply, and a `hash` to resolve the promise for the interface.
 
+>The hello_py feature calls Python; on Telegram:
+<img alt="hello_py on Telegram" src="./images/hello_py.png" />
+
 
 ### Case: 3 `<lang>`s
 
@@ -156,13 +161,17 @@ reply = {
 }
 ```
 
-<aside class="notice">
-Overall, ensure that your functions return the correct JSON `msg`, and we handle the inter-language dataflow logic. See the <a href="#msg-json"><code>msg</code> JSON keys</a>.
-</aside>
+>The hello_py_rb feature calls Python then Ruby; on Slack:
+<img alt="hello_py_rb on Slack" src="./images/hello_py_rb.png" />
 
 
+### Dev pattern
 
 With such pattern, you can chain multiple function calls that bounce among different `<lang>`. Example use case: retrieve data from Ruby on Rails app, pass to Java to run algorithms, then to Python for data analysis, then back to Node.js interface.
+
+<aside class="success">
+The generic advice: ensure that your functions return the correct JSON <code>msg</code>, and we handle the inter-language dataflow logic. See the <a href="#msg-json"><code>msg</code> JSON keys</a>.
+</aside>
 
 
 ### "Ma look! No hand(ler)s!"
@@ -173,17 +182,54 @@ To streamline polyglot development further we've made the `client.<lang>`'s auto
 
 What this means is you can call a **module** (`to`) by its name, and its **function** (`intent`) by specifying the dotpath (if it's nested), then providing a valid `input` format (single argument for now).
 
+In fact, <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>
+
+>To test-run it, you can start the **polyglot server** at `lib/io_start.js`.
+
+```shell
+# shell: start the polyglot server
+node lib/io_start.js
+```
+
+>Uncomment the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> and run it.
+
+```javascript
+// js: scripts/translate.js
+var client = require('../client.js')
+global.gPass = client.gPass
+
+global.gPass({
+  input: "hola amigos",
+  to: 'ai.py',
+  intent: 'nlp.translate'
+}).then(console.log)
+// hello friends
+```
+
+>This calls <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a> that imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>, which returns the translated string instead of a reply JSON. The client will auto-compile a proper reply JSON msg for you.
+
+```python
+# py: lib/py/ais/ai_lib/translate.py
+def translate(source, to="en"):
+  return t.translate(source, from_lang="auto", to_lang=to)
+```
+
+>The translate feature calls Python that returns string that is auto-compiled into JSON msg by client.py; on Slack:
+<img alt="translate on Slack" src="./images/translate.png" />
+
 On receiving a `msg`, the `client.<lang>` tries to call the function by passing `msg`. If that throws an exception, it retries by passing `msg.input`. After the function executes and returns the result, `client.<lang>`'s handler will check if the reply is a valid JSON, and if not, will make it into one via `correctJSON(reply, msg)` by extracting the information needed from the received `msg`.
 
 Lastly, after the `js` `global.gPass` sends out a `msg`, the final reply directed at it should contain an `output` field, as good dev pattern and reliability in promise-resolution. When `global.gPass(msg)` gets its reply and its promise resolved, you will see `hasher.handle invoking cb` in stdout.
 
 
 <aside class="notice">
-In fact, once we finish the NLP auto-parsing feature for user sentences, we wouldn't even need to write an interface; Still working on it.
+In fact, once we finish the NLP auto-parsing feature for user sentences, we wouldn't even need to write an interface; This is still under work.
 </aside>
 
 
 ## Unit Tests
+
+[![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=aiva-v3)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=aiva-v3)](https://coveralls.io/github/kengz/aiva?branch=master)
 
 This repo includes only unit tests for `js` **modules** and **interface** scripts using `mocha`, and runs with `npm test`. Note that tests should be for systems, thus the tests for AI models are excluded.
 
@@ -256,7 +302,7 @@ Socket.io can send deeply nested JSON with standard data type.
 ### Server
 There is a socket.io server that extends Hubot's Express.js server: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
 
->For quick multilingual dev, you can start the **polyglot server** at `lib/io_start`.
+>For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js`.
 
 ```shell
 # shell: start the polyglot server
@@ -272,10 +318,11 @@ This is automatically with <code>npm run</code>, so don't manual-run it before s
 For each language, there is a socket.io client that imports all modules of its language within `lib`. When server sends a `msg` to it, the client's `handle` will find the module and its function using `msg.to, msg.intent` respectively, then call the function with `msg` as the argument. If it gets a valid reply `msg`, it will pass it on to the server.
 
 
->then import a `lib/client.js` to test a local feature from the `js` interface. Example: quickly testing the translate function in `python`.
+>then import a `lib/client.js` to test a local feature from the `js` interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in `python`. Uncomment and run it.
+
 
 ```javascript
-// js: interface scripts
+// js: scripts/translate.js
 var client = require('../client.js')
 global.gPass = client.gPass
 
