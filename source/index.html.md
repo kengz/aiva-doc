@@ -86,5 +86,5 @@ npm run debug # runs aivadev
 
 This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](#adapters) for connecting to different chat platforms.
 
->AIVA on Slack, Telegram:
+>AIVA saying hi, translating, running deep neural net; on Slack, Telegram:
 <img alt="AIVA on Slack, Telegram" src="./images/npm_start.png" />
