@@ -212,7 +212,7 @@ This demonstrates another AI component of AIVA; not only AI can power the bot, t
 | <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a> | Interface script for the deployed model. |
 
 
-Yes, *you did just train a Deep Neural Net and deploy it on Slack for usage*. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole world of possibilities. And that's not it; remember, there is an entire package of nearly every type of machine learning tools, all included in AIVA. Next, we will go over them quickly next, and leave you to explore them more deeply.
+Yes, *you did just train a Deep Neural Network and deploy it on Slack for use*. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole new world of possibilities. And that’s not all; remember, there is an entire package of every major type of machine learning tools, all included in AIVA. Next, we will go over them quickly, and leave you to explore them more deeply.
 
 
 ## <a name="indico"></a>Indico.io
@@ -223,7 +223,7 @@ With Indico.io, everything is done via its REST API or their [wrapper clients](h
 
 In fact, Indico is currently [state of the art](https://indico.io/news/121515_indico_SentimentHQ_Release) in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.
 
-[Read their docs](https://indico.io/docs), and [see what they offer](https://indico.io/product).
+[Read their docs](https://indico.io/docs), [see what they offer](https://indico.io/product), and get [your API key here](https://indico.io/plans). You can get 10k free calls per month, which is sufficient for personal/small team usage.
 
 
 **Add example use cases for all AI module: group under scripts/hello_ai.js**
