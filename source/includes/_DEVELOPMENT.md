@@ -34,11 +34,11 @@ npm test # run unit tests
 For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client for more languages through pull request!
 
 
->For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js`.
+>For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js` with:
 
 ```shell
 # shell: start the polyglot server
-node lib/io_start.js
+npm run server
 ```
 
 <aside class="warning">
@@ -184,11 +184,11 @@ What this means is you can call a **module** (`to`) by its name, and its **funct
 
 In fact, <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>
 
->To test-run it, you can start the **polyglot server** at `lib/io_start.js`.
+>To test-run it, you can start the **polyglot server** at `lib/io_start.js` with:
 
 ```shell
 # shell: start the polyglot server
-node lib/io_start.js
+npm run server
 ```
 
 >Uncomment the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> and run it.
@@ -302,11 +302,11 @@ Socket.io can send deeply nested JSON with standard data type.
 ### Server
 There is a socket.io server that extends Hubot's Express.js server: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
 
->For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js`.
+>For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js` with:
 
 ```shell
 # shell: start the polyglot server
-node lib/io_start.js
+npm run server
 ```
 
 <aside class="warning">
