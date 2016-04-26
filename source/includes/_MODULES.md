@@ -215,5 +215,14 @@ This demonstrates another AI component of AIVA; not only AI can power the bot, t
 Yes, *you did just train a Deep Neural Net and deploy it on Slack for usage*. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole world of possibilities. And that's not it; remember, there is an entire package of nearly every type of machine learning tools, all included in AIVA. Next, we will go over them quickly next, and leave you to explore them more deeply.
 
 
+## <a name="indico"></a>Indico.io
 
+[Indico.io](https://indico.io) is **the go-to machine learning API** for developers. It focuses on the most applicable and useful ML tools for [text and image analysis](https://indico.io/product). This complements the custom-trained models of TensorFlow, and is useful especially when your use case can readily be solved by standard ML models.
+
+With Indico.io, everything is done via its REST API or their [wrapper clients](https://github.com/IndicoDataSolutions) - no model/training is needed. AIVA includes the [Node.js Indico.io wrapper](https://github.com/IndicoDataSolutions/IndicoIo-node), nested under the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.
+
+In fact, Indico is currently [state of the art](https://indico.io/news/121515_indico_SentimentHQ_Release) in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.
+
+
+**Add example use cases for all AI module: group under scripts/hello_ai.js**
 
