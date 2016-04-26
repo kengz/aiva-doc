@@ -62,6 +62,10 @@ global.gPass({
 // hello friends
 ```
 
+<aside class="success">
+For development like above, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+</aside>
+
 
 ## <a name="polyglot-dev"></a>Polyglot Development
 
@@ -333,6 +337,10 @@ global.gPass({
 }).then(console.log)
 // hello friends
 ```
+
+<aside class="success">
+For development like above, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+</aside>
 
 >Note due to how a module is called using `msg.to, msg.intent`, you must ensure that the functions are named properly, and `Ruby`'s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. `lib/rb/Hello.rb` for the `Hello` module.
 
