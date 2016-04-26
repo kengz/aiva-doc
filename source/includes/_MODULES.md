@@ -10,12 +10,16 @@
 | [general customMsg](#custom-msg) | pending |
 | [neo4jKB brain](#neo4jKB-brain) | pending |
 
-misc list of all functions and modules in all lang that come in the box. Need programmatic way to generate such a list, ohh maybe during client start?
+
+<aside class="notice">
+To see all the available AI modules and methods, print the <code>ai</code> objects from <code>lib/js/ai.js</code> and <code>lib/py/ai.py</code>.
+</aside>
+
 
 ## <a name="gen_nlp"></a>general NLP
 
 ```javascript
-// js: scripts/hello_nlp.js
+// js: scripts/hello_ai.js
 var genNLP = require('../lib/js/gen_nlp')
 
 var client = require('../lib/client.js')
@@ -35,7 +39,7 @@ A large part of it is powered by [spaCy](https://spacy.io), which is *"the faste
 
 Next we show an example of how a flight finder can benefit from it. For instance, it can get the `NER` or `noun_phrases` for the locations, time, person; the `time` for a normalized form of ISO time string; `NER_POS_TREE` to understand the dependencies, e.g. what's the origin and target destinations.
 
->The example in <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_nlp.js#L5" target="_blank"><code>scripts/hello_nlp.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.
+>The example in <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js#L5" target="_blank"><code>scripts/hello_ai.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.
 
 
 ```javascript
@@ -219,12 +223,24 @@ Yes, *you did just train a Deep Neural Network and deploy it on Slack for use*. 
 
 [Indico.io](https://indico.io) is **the go-to machine learning API** for developers. It focuses on the most applicable and useful ML tools for [text and image analysis](https://indico.io/product). This complements the custom-trained models of TensorFlow, and is useful especially when your use case can readily be solved by standard ML models.
 
-With Indico.io, everything is done via its REST API or their [wrapper clients](https://indico.io/docs) - no model/training is needed. AIVA includes the [Node.js Indico.io wrapper](https://github.com/IndicoDataSolutions/IndicoIo-node), nested under the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ai.js" target="_blank">lib/js/ai.js</a>. 
+>The indico wrapper is grouped under the `ai` module. Remember to save your API key into the `.keys-` before using. A simple example can be found at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js#L18" target="_blank"><code>scripts/hello_ai.js</code></a>.
+
+```javascript
+// js: scripts/hello_ai.js
+ai.indico.sentiment(['indico is so easy to use!', 'Still really easy, yiss'])
+.then(console.log)
+// [ 0.9782025594088044, 0.9895808115135271 ]
+```
+
+>We also add an interface script <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js" target="_blank"><code>below that</code></a>, and demo it on Telegram. Of course the real application is likely backend oriented, such as gauging the quality of your customer service by analyzing their sentiment in chat.
+
+>Indico on Telegram:
+<img alt="Indico on Telegram" src="./images/indico.png" />
+
+With Indico.io, everything is done via its REST API or their [wrapper clients](https://indico.io/docs) - no model/training is needed. AIVA includes the [Node.js Indico.io wrapper](https://github.com/IndicoDataSolutions/IndicoIo-node), nested under the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.
 
 In fact, Indico is currently [state of the art](https://indico.io/news/121515_indico_SentimentHQ_Release) in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.
 
 [Read their docs](https://indico.io/docs), [see what they offer](https://indico.io/product), and get [your API key here](https://indico.io/plans). You can get 10k free calls per month, which is sufficient for personal/small team usage.
 
-
-**Add example use cases for all AI module: group under scripts/hello_ai.js**
 
