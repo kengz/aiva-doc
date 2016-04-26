@@ -1,14 +1,18 @@
 # <a name="modules"></a>AI Modules
 
+AIVA comes with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. You can use the as needed, directly from within AIVA without extra installations. This section gives a quick overview of their uses, and some useful helper modules.
+
+
 | Module | Implemented? |
 |:---|---|
 | [general NLP](#gen_nlp) | yes |
 | [TensorFlow](#tensorflow) | yes |
 | [Indico.io](#indico) | yes |
 | [Knowledge base](#kbase) | yes |
-| [google APIs](#google-api) | yes |
-| [general customMsg](#custom-msg) | pending |
 | [neo4jKB brain](#neo4jKB-brain) | pending |
+| [Google APIs](#google-api) | yes |
+| [IBM Watson](#watson) | yes |
+| [general customMsg](#custom-msg) | pending |
 
 
 <aside class="notice">
@@ -264,5 +268,37 @@ AIVA comes with 3 knowledge bases, from generic to local:
 >For now you can use Google Knowledge Graph directly to query knowledge. Note this is distinct from normal Google search:
 <img alt="Google Knowledge Graph on Slack" src="./images/googlekg.png" />
 
+
+## <a name="#neo4jKB-brain"></a>Neo4jKB brain
+
+We discussed the [graph brain](#graph-brain) above, known as [`neo4jKB`](https://github.com/kengz/neo4jKB), implemented in neo4j. It has a defined [KB standard](https://github.com/kengz/neo4jKB#kb-standard-basic) on the graph for proper usage as a knowledge base.
+
+This serves as the local knowledge and the central memory system. It is the reason AIVA can behave as one consistent entity across different chat platforms. All of the memory-dependent tasks shall be read from and write to the brain.
+
+AIVA uses the brain for user serialization, standardized in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/user.js" target="_blank"><code>lib/js/user.js</code></a> and called automatically on start from <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/serialize_users.js" target="_blank"><code>scripts/serialize_users.js</code></a>. It will match up the multiple identities of a same user from different platforms. You can see all the serialized user nodes on neo4j's browser interface at `http://localhost:7474/` if you are running locally, or use [SSH forwarding described here](#ssh-browser-forwarding).
+
+>The serialized users in AIVA's neo4jKB graph brain:
+<img alt="Users in brain" src="./images/serialized_users.png" />
+
+The todo list feature is another relevant example. The todo items are connected to their owner. The module logic for neo4jKB is defined in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/todo.js" target="_blank"><code>lib/js/todo.js</code></a>.
+
+>The todos belonging to a user as connected unit of information, in AIVA's neo4jKB graph brain:
+<img alt="User todos" src="./images/user_todos.png" />
+
+These two examples show briefly how to use neo4jKB for AIVA's modules, to help you get started. On our roadmap, we plan to complete the auto-parsing NLP module that automatically canonicalize knowledge from user input, so you don't have to write the define the knowledge yourself. This is closely related to the **autoplanning** of the [knowledge base feature](#kbase), and is part of [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md).
+
+
+## <a name="#google-api"></a>Google APIs
+
+Google APIs are grouped under the `ai` module because many of them are actually AI or powered by AI. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/google.js" target="_blank"><code>lib/js/ais/google.js</code></a> imports the [Google APIs Node.js client](https://github.com/google/google-api-nodejs-client). Not all of the APIs are initialized, you'd have to activate each one as you wish to use on [Google API Manager](https://console.developers.google.com) and in `lib/js/ais/google.js`.
+
+<aside class="notice">
+You must "enable APIs" from Google API Manager for your Google API key to use them.
+</aside>
+
+We have seen Knowledge Graph Search earlier; Google Search actually uses a [npm module google](https://www.npmjs.com/package/google) powered by a scraper, so it is free without quota. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/google.js" target="_blank"><code>scripts/google.js</code></a>. Google Translate and language detection are also based on a scraper, in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a> and is free without quota as well. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>.
+
+
+## <a name="watson"></a>IBM Watson
 
 
