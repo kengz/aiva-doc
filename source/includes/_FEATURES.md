@@ -35,7 +35,9 @@ For the list of supported adapters see [adapters](#adapters).
 
 ## <a name="graph-brain"></a>graph brain
 
-Graph is a very generic and natural way of encoding information, especially for information that doesn't always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.)
+The brain of AIVA is a graph database; it is the central memory that coordinates with different adapters, allowing it to be consistent across the platforms; for example, it can remember who you are or your todo list, even as you switch apps.
+
+Graph is a very generic and natural way of encoding information, especially for information that doesn't always follow a fixed schema. A knowledge base is often implemented as a graph (wordNet, conceptNet, google graph, facebook graph, etc.) due to the adhoc and connected nature of generic knowledge. Thus, we think it's the natural choice for AIVA.
 
 Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice, and it's data units can be schema-free. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier, schema-free allows knowledge creation on-the-fly.
 
@@ -55,7 +57,7 @@ For more, see [Polyglot environment](#polyglot) and [Socket.io clients](#clients
 
 ## <a name="builtin-ai"></a>built-in AI tools
 
-AIVA comes with a well-rounded set of AI/machine learning tools. We have packaged these tools nicely, so you can get right into work with them. This saves you the tideous hunt, installation, and setup. 
+AIVA comes with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. We have packaged these tools nicely, so you can get right into work with them. This saves you the tideous hunt, installation, and setup. 
 
 `lib/<lang>/ais/` contains the specific implementations of the AI modules/models, and `lib/<lang>/ai.<lang>` is the high-level script that imports the functions from `lib/<lang>/ais/` for usage.
 
