@@ -227,6 +227,7 @@ Yes, *you did just train a Deep Neural Network and deploy it on Slack for use*. 
 
 ```javascript
 // js: scripts/hello_ai.js
+var ai = require('../lib/js/ai')
 ai.indico.sentiment(['indico is so easy to use!', 'Still really easy, yiss'])
 .then(console.log)
 // [ 0.9782025594088044, 0.9895808115135271 ]
@@ -242,5 +243,26 @@ With Indico.io, everything is done via its REST API or their [wrapper clients](h
 In fact, Indico is currently [state of the art](https://indico.io/news/121515_indico_SentimentHQ_Release) in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.
 
 [Read their docs](https://indico.io/docs), [see what they offer](https://indico.io/product), and get [your API key here](https://indico.io/plans). You can get 10k free calls per month, which is sufficient for personal/small team usage.
+
+
+## <a name="kbase"></a>Knowledge base
+
+Sometimes we need a bot to have general knowledge, such as what a phone is, as well as local knowledge, such as user preferences. This can aid with its functions, and allow for **autoplanning**.
+
+Autoplanning is vital for a bot to be able to function on its own without being explicitly told about every small detail of a task. Take the example input "call my wife". It's true that we can hard-code the logic to find who "wife" is for a given person, get "wife"'s number, and execute the dial function with it as the argument. What about plenty of other tasks? We can't possibly hand-code each one.
+
+Here's a slightly different approach: for every function we allow the bot to do, we only define the function and its needed arguments. For calling a number it'd be `function = dial, args = [number]`. With a knowledge base and autoplanning, the input "call my wife" will be parsed into `function = dial`, `args = [number]`. Since it's only given a `person`, it can use the knowledge base to trace the connection `person -[has]-> number`, and proceed to retrieve the needed information from memory. The bot can use its own knowledge to plan and execute the function autonomously.
+
+This is a pretty advanced feature that's still being implemented for AIVA. It is based on the theoretical proofs and outlines for a generic interface [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md).
+
+AIVA comes with 3 knowledge bases, from generic to local: 
+
+- [Google Knowledge Graph Search](https://developers.google.com/knowledge-graph/)
+- [MIT ConceptNet](https://github.com/Planeshifter/node-concept-net)
+- the local [neo4jKB brain](#graph-brain).
+
+>For now you can use Google Knowledge Graph directly to query knowledge. Note this is distinct from normal Google search:
+<img alt="Google Knowledge Graph on Slack" src="./images/googlekg.png" />
+
 
 
