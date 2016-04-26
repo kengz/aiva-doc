@@ -71,8 +71,6 @@ npm run gi
 
 - **setup keys**: update `.env`, `bin/.key-aiva` (production), `bin/.key-aivadev` (development).
 
-Check [**Setup tips**](#setup-tips) for more help.
-
 <aside class="notice">
 If you prefer a different bot name, replace "aiva" from the <code>bin/.keys-</code> and in <code>package.json</code>.
 </aside>
@@ -90,3 +88,7 @@ This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook.
 
 >AIVA saying hi, translating, running deep neural net; on Slack, Telegram:
 <img alt="AIVA on Slack, Telegram" src="./images/npm_start.png" />
+
+
+Check [**Setup tips**](#setup-tips) for help.
+
