@@ -1,4 +1,4 @@
-# <a name="modules"></a>Modules
+# <a name="modules"></a>AI Modules
 
 | Module | Implemented? |
 |:---|---|
@@ -213,6 +213,7 @@ This demonstrates another AI component of AIVA; not only AI can power the bot, t
 
 
 Yes, *you did just train a Deep Neural Net and deploy it on Slack for usage*. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole world of possibilities. And that's not it; remember, there is an entire package of nearly every type of machine learning tools, all included in AIVA. Next, we will go over them quickly next, and leave you to explore them more deeply.
+
 
 
 
