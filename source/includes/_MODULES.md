@@ -3,7 +3,7 @@
 | Module | Implemented? |
 |:---|---|
 | [general NLP](#gen_nlp) | yes |
-| [tensorflow](#tensorflow) | yes |
+| [TensorFlow](#tensorflow) | yes |
 | [Indico.io](#indico) | yes |
 | [Knowledge base](#kbase) | yes |
 | [google APIs](#google-api) | yes |
@@ -180,5 +180,39 @@ The extracted NLP properties are listed below. For more details, refer to the li
 | pos_fine | [Finer](https://spacy.io/docs#token-postags) Part-of-speech tagging.  |
 | NER_POS_tree | The [syntactic and dependency parse tree](https://spacy.io/docs#doc-spans-nounchunks) of text, seen in [DisplaCy](https://spacy.io/demos/displacy) |
 | NER_POS_tag | The flatten array of NER_POS_tree, without the dependencies. |
-| time | Parsed time if any, as ISO time string. |
+| time | [Parsed time](https://github.com/matthewmueller/date) if any, as ISO time string. |
+
+
+## <a name="tensorflow"></a>TensorFlow
+
+[TensorFlow](https://www.tensorflow.org) is used mainly to build neural networks. There is a lot of comprehensive tutorials for it, so instead we will introduce you to the fastest TensorFlow interface: [SkFlow](https://github.com/tensorflow/skflow).
+
+SkFlow makes it very easy to use TensorFlow, and insanely fast to build a model. It comes with many useful wrapped methods and models. Check out this [demo post written by the team](http://terrytangyuan.github.io/2016/03/14/scikit-flow-intro/), their [tutorials](https://github.com/tensorflow/skflow#tutorial), and [examples](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/skflow).
+
+We show how you can deploy a neural net with AIVA, with a sample Deep Neural Network trained on the Titanic data.
+
+The TensorFlow (and other) AI models shall be grouped under <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a>. The top level <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> script will import from this folder for usage via Socket.io.
+
+>The Titanic DNN model can be trained using TensorFlow under <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/py/ais/dnn_titanic_train.py#L53" target="_blank"><code>lib/py/ais/dnn_titanic_train.py</code></a> after you uncomment and run it. It draws data from the sibling folder <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/data/" target="_blank"><code>lib/py/ais/data/</code></a>, and the model is saved to <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a>. 
+
+>For deployment, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> imports and exposes the methods in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a>. They can then be used to do predictions from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a>.
+
+>TensorFlow Titanic DNN on Slack:
+<img alt="Titanic DNN on Slack" src="./images/titanic_dnn.png" />
+
+This demonstrates another AI component of AIVA; not only AI can power the bot, the bot can serve as an interface to specific AIs too. Feel free to explore the examples in AIVA and the resources given earlier. Doing AI is much easier today!
+
+| file/folder | details |
+|:---|---|
+| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_train.py" target="_blank">lib/py/ais/dnn_titanic_train.py</a> | Train and save the Titanic DNN model. |
+| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/data/" target="_blank">lib/py/ais/data/</a> | Folder for training and test data. |
+| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a> | Folder for the saved model for deployment. Will be created when new model is trained. |
+| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/" target="_blank">lib/py/ais/ai_lib/</a> | Library with helpers for the AI folder. |
+| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a> | Deploy the DNN titatnic model. |
+| <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a> | Interface script for the deployed model. |
+
+
+Yes, *you did just train a Deep Neural Net and deploy it on Slack for usage*. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole world of possibilities. And that's not it; remember, there is an entire package of nearly every type of machine learning tools, all included in AIVA. Next, we will go over them quickly next, and leave you to explore them more deeply.
+
+
 
