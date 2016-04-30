@@ -325,3 +325,14 @@ These special messages can be sent via `robot.adapter.customMessage(attachments)
 For more, see [adapters](#adapters).
 
 ! need work on a quick customFormat method, generalize `slack_att`
+
+today: 
+
+- finish Modules
+- change skflow installation: update tensorflow then import script
+- adapters, setup and demo customMsg usage
+- customMsg split with parser for adapters
+- user serialization
+- change stylesheet
+- add wit.ai
+- add fb adapter webhook setup shit
