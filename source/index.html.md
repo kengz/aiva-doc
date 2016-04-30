@@ -35,7 +35,7 @@ It is a **bot-generalization**: you can implement any features, use it simultane
 | general-purpose | An app interface, AI assistant, anything! |
 | cross-platform | Deploy simultaneously on **Slack, Telegram, Facebook**, or any [hubot adapters](https://github.com/github/hubot/blob/master/docs/adapters.md) |
 | multi-language | Code in and coordinate among `Node.js`, `Python`, `Ruby`, etc. |
-| built-in with AI tools | Tensorflow, SkFlow, Indico.ml, spaCy, Watson, Google APIs |
+| built-in with AI tools | Tensorflow, SkFlow, Scikit, Pandas, Indico.ml, spaCy, Watson, Google APIs |
 | hackable | It extends [Hubot](https://github.com/github/hubot). Add your own modules! |
 | powerful, easy to use | Check out [setup](#setup) and [features](#features) |
 
