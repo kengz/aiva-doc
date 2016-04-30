@@ -10,7 +10,7 @@ AIVA comes with a set of well-rounded set AI/machine learning tools - each is th
 | [SkFlow](#skflow) | yes |
 | [Indico.io](#indico) | yes |
 | [Knowledge base](#kbase) | yes |
-| [neo4jKB brain](#neo4jKB-brain) | pending |
+| [neo4jKB brain](#neo4jKB-brain) | minimal |
 | [Google APIs](#google-api) | yes |
 | [IBM Watson](#watson) | yes |
 | [robot.adapter.customMessage](#custom-msg) | pending |

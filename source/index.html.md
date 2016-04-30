@@ -41,9 +41,9 @@ It is a **bot-generalization**: you can implement any features, use it simultane
 
 >To see what they mean, say you have a todo-list feature for AIVA, written in Node.js and leverages NLP and ML from Python. Set your todo list earlier from Slack on desktop? You can access it from Telegram or Facebook on mobile.
 
-We see people losing a lot of time building bots instead of focusing on what they really want to do. It still requires much effort to just get a bot up and running. Moreover, the bot built is often confined to a single language, single platform, and without AI capabilities. Why choose when you can have all of it?
+We see people losing a lot of time building bots instead of focusing on what they really want to do. It still requires much effort to just get a bot up and running. Moreover, the bot built is often confined to a single language, single platform, and without AI capabilities. Why restrict when you can have all of it? Why build multiple bots when you can have one that plugs into all platforms and runs all languages?
 
-AIVA exists to help with that - we do the heavy-lifting and build a ready-to-use bot; it is general purpose, multi-language, cross-platform, with robust design and tests, to suite your needs. AIVA gives you powerful bot tools, saves you the time to build from scratch, and allows you to focus on what you want to do.
+AIVA exists to help with that - we do the heavy-lifting and build a ready-to-use bot; it is general purpose, multi-language, cross-platform, with robust design and tests, to suite your needs. AIVA gives you powerful bot tools, saves you the time to build from scratch, and allows you to focus on what you want to do. Morever, you can **"build once, run everywhere"** with AIVA's multi-adapter (Slack, Telegram, Fb).
 
 
 
