@@ -402,14 +402,3 @@ What goes where:
 | .env | Non-bot-specific environment variables. |
 | external-scripts.json | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them in here and `package.json`. | Specifies project dependencies and command shortcuts with npm. |
 
-
-## What to use for what
-
-Some of the best/recommended libraries for things:
-
-- **NLP**: SpaCy(python), TextBlob(py), Natural(js), StanfordNLP(java), Watson, Indico.io, Wordnet
-- **Machine learning**: scikit-learn(py), pandas(py), skflow(py), Google APIs
-- **Deep learning**: Tensorflow(py), Skflow(py), Torch(lua), Theano(py), leaf(rust) , deeplearning4j(java)
-- **Knowledge/concept base**: ConceptNet, Wordnet, Google graph
-- Whatever you do best in your favorite languages
-

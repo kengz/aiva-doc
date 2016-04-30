@@ -7,6 +7,7 @@ AIVA comes with a set of well-rounded set AI/machine learning tools - each is th
 |:---|---|
 | [general NLP](#gen_nlp) | yes |
 | [TensorFlow](#tensorflow) | yes |
+| [SkFlow](#skflow) | yes |
 | [Indico.io](#indico) | yes |
 | [Knowledge base](#kbase) | yes |
 | [neo4jKB brain](#neo4jKB-brain) | pending |
@@ -225,6 +226,16 @@ Yes, *you did just train a Deep Neural Network and deploy it on Slack for use*. 
 See [SkFlow](https://github.com/tensorflow/skflow) for their tutorials and documentation.
 
 
+## <a name="skflow"></a>SkFlow Modules
+
+SkFlow is under TensorFlow. Besides, SkFlow also comes with:
+
+- [**scikit-learn**](http://scikit-learn.org)
+- [**pandas**](http://pandas.pydata.org) 
+
+both of which are very popular Python machine learning libraries for techniques that complement the neural nets. SkFlow is designed to be used with all three of them: TensorFlow, scikit and pandas.
+
+
 ## <a name="indico"></a>Indico.io
 
 [Indico.io](https://indico.io) is **the go-to machine learning API** for developers. It focuses on the most applicable and useful ML tools for [text and image analysis](https://indico.io/product). This complements the custom-trained models of TensorFlow, and is useful especially when your use case can readily be solved by standard ML models.
@@ -323,16 +334,3 @@ Sending plain texts to different adapters is straightforward. However, sometimes
 These special messages can be sent via `robot.adapter.customMessage(attachments)` - a method that most adapters implement (Slack, Telegram, Facebook adapters have it). All we need to do is to format the attachments properly by detecting the current adapter using `robot.adapterName`, then format the attachments to the right format with `customFormat`.
 
 For more, see [adapters](#adapters).
-
-! need work on a quick customFormat method, generalize `slack_att`
-
-today: 
-
-- finish Modules
-- change skflow installation: update tensorflow then import script
-- adapters, setup and demo customMsg usage
-- customMsg split with parser for adapters
-- user serialization
-- change stylesheet
-- add wit.ai
-- add fb adapter webhook setup shit
