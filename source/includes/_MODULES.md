@@ -12,7 +12,7 @@ AIVA comes with a set of well-rounded set AI/machine learning tools - each is th
 | [neo4jKB brain](#neo4jKB-brain) | pending |
 | [Google APIs](#google-api) | yes |
 | [IBM Watson](#watson) | yes |
-| [general customMsg](#custom-msg) | pending |
+| [robot.adapter.customMessage](#custom-msg) | pending |
 
 
 <aside class="notice">
@@ -220,7 +220,9 @@ This demonstrates another AI component of AIVA; not only AI can power the bot, t
 | <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a> | Interface script for the deployed model. |
 
 
-Yes, *you did just train a Deep Neural Network and deploy it on Slack for use*. The mythical creative of deep learning - now at your finger tip - is going to help you unleash a whole new world of possibilities. And that’s not all; remember, there is an entire package of every major type of machine learning tools, all included in AIVA. Next, we will go over them quickly, and leave you to explore them more deeply.
+Yes, *you did just train a Deep Neural Network and deploy it on Slack for use*. The mythical creative of deep learning - now at your fingertips - is going to help you unleash a whole new world of possibilities. And that’s not all; remember, there is an entire package of every major type of machine learning tools, all included in AIVA. Next, we will go over them quickly, and leave you to explore them more deeply.
+
+See [SkFlow](https://github.com/tensorflow/skflow) for their tutorials and documentation.
 
 
 ## <a name="indico"></a>Indico.io
@@ -283,9 +285,11 @@ AIVA uses the brain for user serialization, standardized in <a href="https://git
 The todo list feature is another relevant example. The todo items are connected to their owner. The module logic for neo4jKB is defined in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/todo.js" target="_blank"><code>lib/js/todo.js</code></a>.
 
 >The todos belonging to a user as connected unit of information, in AIVA's neo4jKB graph brain:
-<img alt="User todos" src="./images/user_todos.png" />
+<img alt="User todos" src="./images/user_todo.png" />
 
 These two examples show briefly how to use neo4jKB for AIVA's modules, to help you get started. On our roadmap, we plan to complete the auto-parsing NLP module that automatically canonicalize knowledge from user input, so you don't have to write the define the knowledge yourself. This is closely related to the **autoplanning** of the [knowledge base feature](#kbase), and is part of [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md).
+
+See [neo4jKB](https://github.com/kengz/neo4jKB) for documentation.
 
 
 ## <a name="#google-api"></a>Google APIs
@@ -298,7 +302,26 @@ You must "enable APIs" from Google API Manager for your Google API key to use th
 
 We have seen Knowledge Graph Search earlier; Google Search actually uses a [npm module google](https://www.npmjs.com/package/google) powered by a scraper, so it is free without quota. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/google.js" target="_blank"><code>scripts/google.js</code></a>. Google Translate and language detection are also based on a scraper, in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a> and is free without quota as well. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>.
 
+See [google API Nodejs client](https://github.com/google/google-api-nodejs-client) for their documentation.
+
 
 ## <a name="watson"></a>IBM Watson
 
+IBM Watson is a collection of cognitive computing tools. AIVA's `ai` module includes the IBM Watson Node.js client at <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a>.
 
+To use Watson, you need to register at [IBM Watson Bluemix](http://www.ibm.com/cloud-computing/bluemix/watson/), activate the API you want, and get the individual credentials `<username>:<password>`. Note that the credentials are distinct for each API you activate.
+
+Then, add the credentials in `bin/.keys-aiva` and `bin/.keys-aivadev` with the format `WATSON_<API-NAME>_CRED=<username>:<password>`, for example `WATSON_PERSONALITY_INSIGHTS_CRED=<username>:<password>` for Personality Insights. The <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a> module will automatically read the environment variable and activate the function for your usage.
+
+See the [Watson node sdk](https://github.com/watson-developer-cloud/node-sdk) for their documentation.
+
+
+## <a name="custom-msg"></a>robot.adapter.customMessage
+
+Sending plain texts to different adapters is straightforward. However, sometimes we wish to take advantage of the available custom formatting of a platform, such as Slack attachment or Facebook rich messages.
+
+These special messages can be sent via `robot.adapter.customMessage(attachments)` - a method that most adapters implement (Slack, Telegram, Facebook adapters have it). All we need to do is to format the attachments properly by detecting the current adapter using `robot.adapterName`, then format the attachments to the right format with `customFormat`.
+
+For more, see [adapters](#adapters).
+
+! need work on a quick customFormat method, generalize `slack_att`
