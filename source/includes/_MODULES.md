@@ -13,7 +13,6 @@ AIVA comes with a set of well-rounded set AI/machine learning tools - each is th
 | [neo4jKB brain](#neo4jKB-brain) | minimal |
 | [Google APIs](#google-api) | yes |
 | [IBM Watson](#watson) | yes |
-| [robot.adapter.customMessage](#custom-msg) | pending |
 
 
 <aside class="notice">
@@ -326,11 +325,3 @@ Then, add the credentials in `bin/.keys-aiva` and `bin/.keys-aivadev` with the f
 
 See the [Watson node sdk](https://github.com/watson-developer-cloud/node-sdk) for their documentation.
 
-
-## <a name="custom-msg"></a>robot.adapter.customMessage
-
-Sending plain texts to different adapters is straightforward. However, sometimes we wish to take advantage of the available custom formatting of a platform, such as Slack attachment or Facebook rich messages.
-
-These special messages can be sent via `robot.adapter.customMessage(attachments)` - a method that most adapters implement (Slack, Telegram, Facebook adapters have it). All we need to do is to format the attachments properly by detecting the current adapter using `robot.adapterName`, then format the attachments to the right format with `customFormat`.
-
-For more, see [adapters](#adapters).

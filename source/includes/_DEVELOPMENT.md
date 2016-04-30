@@ -371,7 +371,7 @@ The msg goes through socket.io as
 - `-> js(io_server.js)`
 - `-> <lang>(client.<lang>)`
 - `-> js(io_server.js)`
-- `-> ...(can bound among different <lang> modules)`
+- `-> ...(can bounce among different <lang> modules)`
 - `-> js(client.js)`
 - `-> js(interface script)`
 

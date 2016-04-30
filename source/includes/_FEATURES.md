@@ -7,6 +7,7 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 |:---|---|
 | [fast setup](#setup2) | yes |
 | [cross-platform](#cross-platform) | implementing |
+| [customMessage](#custom-msg) | pending |
 | [graph brain](#graph-brain) | improving |
 | [multi-language](#multi-language) | yes |
 | [built-in AI tools](#builtin-ai) | yes |
@@ -22,15 +23,24 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 
 ## <a name="cross-platform"></a>cross-platform
 
-The Facebook bot paradigm is "why use multiple apps when you can access them from one bot?". I dare to ask "why talk to the bot from one platform instead of everywhere?"
+The Facebook bot paradigm is "why use multiple apps when you can access them from one bot?". We dare to ask "why talk to the bot from one platform instead of everywhere?" With AIVA we can **build once, run everywhere**.
 
 ### Omnipresence
 
-This inspires the *omnipresence* feature: a bot that recognizes who you are, and can continue conversation in any supported platforms. We talk to our friends everywhere, and they don't forget us when we switch apps. Bots should do the same too.
+This inspires the **omnipresence** feature: a bot that recognizes who you are, and can continue conversation in any supported platforms. We talk to our friends everywhere, and they don't forget us when we switch apps. Bots should do the same too.
 
-In short: *one brain, multiple interfaces*. AIVA's hubot base allows for generality, and she can tap into multiple platforms by using different [adapters](#adapters). Unlike the original hubot though, she can exist simultaneously on multiple platforms by having several interface instances plugged into the respective adapters, and all share the same brain, which serves as the central memory.
+In short: **one brain, multiple interfaces**. AIVA's hubot base allows for generality, and it can tap into multiple platforms by using different [adapters](#adapters). Unlike the original hubot though, she can exist simultaneously on multiple platforms by having several interface instances plugged into the respective adapters, and all share the same brain, which serves as the central memory.
 
-For the list of supported adapters see [adapters](#adapters).
+See [adapters](#adapters) for more.
+
+
+## <a name="custom-msg"></a>customMessage
+
+Sending plain texts to different adapters is straightforward. However, sometimes we wish to take advantage of the available custom formatting of a platform, such as Slack attachment or Facebook rich messages.
+
+These special messages can be sent via `robot.adapter.customMessage(attachments)` - a method that most adapters implement (Slack, Telegram, Facebook adapters have it). All we need to do is to format the attachments properly by detecting the current adapter using `robot.adapterName`, then format the attachments to the right format with `customFormat`.
+
+See [adapters](#adapters) for more.
 
 
 ## <a name="graph-brain"></a>graph brain

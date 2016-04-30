@@ -8,10 +8,10 @@ toc_footers:
   - <a href='https://github.com/kengz/aiva-doc'>AIVA documentation Github</a>
 
 includes:
-  - DEVELOPMENT
   - FEATURES
   - MODULES
   - ADAPTERS
+  - DEVELOPMENT
   - TIPS
   - CHANGELOG
   - CONTRIBUTING
