@@ -11,8 +11,8 @@ includes:
   - DEVELOPMENT
   - FEATURES
   - MODULES
-  - TIPS
   - ADAPTERS
+  - TIPS
   - CHANGELOG
   - CONTRIBUTING
 
