@@ -66,7 +66,7 @@ Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digi
 ## <a name="setup"></a>Setup, Run
 
 ### <a name="one-time-setup"></a>One-time Setup
-- **install dependencies**: 
+- **install dependencies**: (first installation may take ~20 mins, mainly due to the AI modules)
 
 ```shell
 npm run gi
