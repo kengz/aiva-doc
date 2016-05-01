@@ -6,6 +6,7 @@ AIVA comes with a set of well-rounded set AI/machine learning tools - each is th
 | Module | Implemented? |
 |:---|---|
 | [general NLP](#gen_nlp) | yes |
+| [Wit.ai](#witai) | yes |
 | [TensorFlow](#tensorflow) | yes |
 | [SkFlow](#skflow) | yes |
 | [Indico.io](#indico) | yes |
@@ -189,6 +190,24 @@ The extracted NLP properties are listed below. For more details, refer to the li
 | NER_POS_tree | The [syntactic and dependency parse tree](https://spacy.io/docs#doc-spans-nounchunks) of text, seen in [DisplaCy](https://spacy.io/demos/displacy) |
 | NER_POS_tag | The flatten array of NER_POS_tree, without the dependencies. |
 | time | [Parsed time](https://github.com/matthewmueller/date) if any, as ISO time string. |
+
+
+## <a name="witai"></a>Wit.ai
+
+[Wit.ai](https://wit.ai/) is pretty sick, with a bot engine powered by AI. They are now part of Facebook, if you don't already know, and it's free to use.
+
+AIVA is fully compatible with Wit.ai, and we use its [Node.js client](https://github.com/wit-ai/node-wit). Bear in mind that you need to manually train it for each human input you wish to parse, or you can find some existing trained models. Their own guide is pretty comprehensive, so we won't discuss much here.
+
+```shell
+# install to use wit.ai
+npm i --save node-wit
+```
+
+>Then add the token to bin/.keys-aiva and bin/.keys-aivadev; it will be set automatically.
+
+```shell
+WIT_TOKEN=<your_wit_token>
+```
 
 
 ## <a name="tensorflow"></a>TensorFlow

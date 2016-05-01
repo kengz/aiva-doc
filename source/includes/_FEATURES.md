@@ -81,6 +81,7 @@ The list of AI modules and their respective language:
 | [scikit-learn](http://scikit-learn.org/stable/) | Generic ML algorithms | Python |
 | [SkFlow](https://github.com/tensorflow/skflow) | Tensorflow + Scikit-learn | Python |
 | [spaCy](https://spacy.io) | NLP | Python |
+| [Wit.ai](https://github.com/wit-ai/node-wit) | NLP for developers | Node.js client |
 | [Indico.io](https://indico.io) | text+image analysis | (REST API) Node.js client |
 | [IBM Watson](http://www.ibm.com/cloud-computing/bluemix/watson/) | cognitive computing | Node.js client |
 | [Google API](https://console.developers.google.com/apis) | multiple | Node.js client |
