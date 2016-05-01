@@ -21,7 +21,7 @@ AIVA uses [`forever`](https://github.com/foreverjs/forever) to keep-alive (with 
 
 ## <a name="ngrok"></a>Webhook using ngrok
 
-Webhook is automatically enable by an internal ngrok setup. Access the ngrok interface at [`http://localhost:4040`](http://localhost:4040) after AIVA is up.
+You don't need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/aiva-v3/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at [`http://localhost:4040`](http://localhost:4040) after AIVA is run.
 
 Note that for each adapter, if it needs a webhook, you need to specify the `PORT` and the environment key for the webhook, at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/index.js" target="_blank"><code>index.js</code></a> in variables `adapterPorts`, `adapterWebhookKey`.
 
