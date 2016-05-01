@@ -27,7 +27,7 @@ This documentation is still being completed.
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
 
-It is a **bot-generalization**: you can implement any features, use it simultaneously on the major platforms, and code in multiple languages.
+It is a **bot-generalization**: you can implement any features, use with major AI tools, deploy across platforms, and code in multiple languages.
 
 
 | AIVA is | Details |
