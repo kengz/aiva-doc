@@ -2,7 +2,7 @@
 
 AIVA can simultaneously connect to multiple chat platforms and still behave as one entity, due to its central [graph brain](#neo4jKB-brain). This allows you to **build once, run everywhere**.
 
-It utilizes [hubot's adapters](https://github.com/github/hubot/blob/master/docs/adapters.md). So, feel free to add any as you wish. AIVA comes with Slack, Telegram, Fb adapters, installed with `npm run gi`, and auto-run with AIVA.
+It utilizes [hubot's adapters](https://github.com/github/hubot/blob/master/docs/adapters.md). So, feel free to add any as you wish. AIVA comes with **Slack, Telegram, Fb** adapters, installed with `npm run gi`, and auto-run with AIVA.
 
 For each adapter, we encourage you to create two tokens, for **production** and **development** respectively. All bot tokens go into <a href="https://github.com/kengz/aiva/blob/aiva-v3/bin/.keys-example" target="_blank"><code>bin/.keys-aiva or bin/.keys-aiva</code></a> created automatically during `npm run gi`. If you do not wish to use an adapter, simple remove its token.
 
