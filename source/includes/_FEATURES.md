@@ -71,7 +71,7 @@ AIVA comes with a set of well-rounded set AI/machine learning tools - each is th
 
 `lib/<lang>/ais/` contains the specific implementations of the AI modules/models, and `lib/<lang>/ai.<lang>` is the high-level script that imports the functions from `lib/<lang>/ais/` for usage.
 
-Thanks to the multi-language feature, we can easily access the machine learning universe of Python. For example, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a> contains a sample Tensorflow training script <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_train.py" target="_blank"><code>dnn_titanic_train.py</code></a>, and a script to deploy that DNN for usage <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank"><code>dnn_titanic_deploy.py</code></a>. It is interfaced through <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank"><code>scripts/dnn_titanic.js</code></a> that allows you to use run predictions.
+Thanks to the multi-language feature, we can easily access the machine learning universe of Python. For example, <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a> contains a sample Tensorflow training script <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_train.py" target="_blank"><code>dnn_titanic_train.py</code></a>, and a script to deploy that DNN for usage <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_deploy.py" target="_blank"><code>dnn_titanic_deploy.py</code></a>. It is interfaced through <a href="https://github.com/kengz/aiva/tree/master/scripts/dnn_titanic.js" target="_blank"><code>scripts/dnn_titanic.js</code></a> that allows you to use run predictions.
 
 The list of AI modules and their respective language:
 
@@ -89,14 +89,14 @@ The list of AI modules and their respective language:
 | [wordpos](https://github.com/moos/wordpos) | WordNet POS | Node.js |
 | [date.js](https://github.com/matthewmueller/date) | time-parsing | Node.js |
 
-These tools are put close together in a [polyglot environment](#polyglot), so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses `date.js` and `spaCy`.
+These tools are put close together in a [polyglot environment](#polyglot), so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/master/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses `date.js` and `spaCy`.
 
 For more in-depth details, see [modules](#modules). Also if find a great ML tool we should include, submit a Pull Request!
 
 
 ## <a name="theoretical"></a>theoretical power
 
-AIVA is based on a theoretical interface [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
+AIVA is based on a theoretical interface [HTMI](https://github.com/kengz/aiva/tree/master/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/master/docs/CGKB.md) that is *human-bounded Turing complete*. The theorem establishes that HTMI can be used by a human to solve any problems or perform any functions she enumerates that are solvable by a Turing Machine. Complete implementation is still underway.
 
 Why is this important? Because for far too many times people have tried to solve problems that are unsolvable. Many of the bots out there are actually very restrictive. To allow developers to solve problems with full power, and with easy, we have built a general-purpose tool and made it theoretically complete, so you can focus on solving your problem.
 

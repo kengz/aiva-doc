@@ -46,7 +46,7 @@ This is automatically run with <code>npm run</code>, so don't manual-run it befo
 </aside>
 
 
->then import a `lib/client.js` to test a local feature from the `js` interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in `python`. Uncomment and run it.
+>then import a `lib/client.js` to test a local feature from the `js` interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/master/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in `python`. Uncomment and run it.
 
 
 ```javascript
@@ -63,7 +63,7 @@ global.gPass({
 ```
 
 <aside class="success">
-For development like above, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
 </aside>
 
 
@@ -96,9 +96,9 @@ Since the AIVA is based on hubot, you can refer to <a href="https://github.com/g
 
 e.g. `<lang> = js, py`. 
 
-1\. You write a module <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a>
+1\. You write a module <a href="https://github.com/kengz/aiva/tree/master/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a>
 
-2\. Call it from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> using the exposed `global.gPass` function, with the JSON `msg`
+2\. Call it from the interface <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> using the exposed `global.gPass` function, with the JSON `msg`
 
 ```javascript
 // js: scripts/hello_py.js
@@ -132,11 +132,11 @@ The JSON fields above are required for their purposes. `global.gPass` used by th
 
 e.g. `<lang> = js, py, rb`
 
-1\. You write modules in `py, rb` <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a>, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a>
+1\. You write modules in `py, rb` <a href="https://github.com/kengz/aiva/tree/master/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a>, <a href="https://github.com/kengz/aiva/tree/master/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a>
 
-2\. Call one (`py` in this example) from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py_rb.js" target="_blank"><code>scripts/hello_py_rb.js</code></a> as described earlier.
+2\. Call one (`py` in this example) from the interface <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_py_rb.js" target="_blank"><code>scripts/hello_py_rb.js</code></a> as described earlier.
 
-3\. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a> passes it further to the `rb` module, by returning the JSON `msg`
+3\. <a href="https://github.com/kengz/aiva/tree/master/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a> passes it further to the `rb` module, by returning the JSON `msg`
 
 ```python
 # py: lib/py/hello_rb.py
@@ -149,7 +149,7 @@ reply = {
 }
 ```
 
-4\. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a> ensure the final module function returns a reply JSON `msg` to the interface. 
+4\. <a href="https://github.com/kengz/aiva/tree/master/lib/rb/Hello.rb" target="_blank"><code>lib/rb/Hello.rb</code></a> ensure the final module function returns a reply JSON `msg` to the interface. 
 
 <aside class="warning">
 For auto-id, Ruby filename need to be the same as its module name, case-sensitive.
@@ -186,7 +186,7 @@ To streamline polyglot development further we've made the `client.<lang>`'s auto
 
 What this means is you can call a **module** (`to`) by its name, and its **function** (`intent`) by specifying the dotpath (if it's nested), then providing a valid `input` format (single argument for now).
 
-In fact, <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>
+In fact, <a href="https://github.com/kengz/aiva/tree/master/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/master/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>
 
 >To test-run it, you can start the **polyglot server** at `lib/io_start.js` with:
 
@@ -195,7 +195,7 @@ In fact, <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.j
 npm run server
 ```
 
->Uncomment the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> and run it.
+>Uncomment the snippet at the top of <a href="https://github.com/kengz/aiva/blob/master/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> and run it.
 
 ```javascript
 // js: scripts/translate.js
@@ -210,7 +210,7 @@ global.gPass({
 // hello friends
 ```
 
->This calls <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a> that imports <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>, which returns the translated string instead of a reply JSON. The client will auto-compile a proper reply JSON msg for you.
+>This calls <a href="https://github.com/kengz/aiva/tree/master/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a> that imports <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>, which returns the translated string instead of a reply JSON. The client will auto-compile a proper reply JSON msg for you.
 
 ```python
 # py: lib/py/ais/ai_lib/translate.py
@@ -244,7 +244,7 @@ For the module of other `<lang>`, you may add any unit testing framework of your
 
 ### <a name="msg-json"></a>`msg` JSON keys for different purposes.
 
-- to call a module's function in `<lang>`: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a>
+- to call a module's function in `<lang>`: <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a>
 
 ```javascript
 // js: scripts/hello_py.js
@@ -256,7 +256,7 @@ msg = {
 }
 ```
 
-- to reply the payload to sender: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a>
+- to reply the payload to sender: <a href="https://github.com/kengz/aiva/tree/master/lib/py/hello.py" target="_blank"><code>lib/py/hello.py</code></a>
 
 ```python
 # py: lib/py/hello.py
@@ -268,7 +268,7 @@ reply = {
 }
 ```
 
-- to pass on payload to other module's function: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a>
+- to pass on payload to other module's function: <a href="https://github.com/kengz/aiva/tree/master/lib/py/hello_rb.py" target="_blank"><code>lib/py/hello_rb.py</code></a>
 
 ```python
 # py: lib/py/hello_rb.py
@@ -304,7 +304,7 @@ Socket.io can send deeply nested JSON with standard data type.
 
 
 ### Server
-There is a socket.io server that extends Hubot's Express.js server: <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
+There is a socket.io server that extends Hubot's Express.js server: <a href="https://github.com/kengz/aiva/tree/master/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
 
 >For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js` with:
 
@@ -322,7 +322,7 @@ This is automatically with <code>npm run</code>, so don't manual-run it before s
 For each language, there is a socket.io client that imports all modules of its language within `lib`. When server sends a `msg` to it, the client's `handle` will find the module and its function using `msg.to, msg.intent` respectively, then call the function with `msg` as the argument. If it gets a valid reply `msg`, it will pass it on to the server.
 
 
->then import a `lib/client.js` to test a local feature from the `js` interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in `python`. Uncomment and run it.
+>then import a `lib/client.js` to test a local feature from the `js` interface. Example: the snippet at the top of <a href="https://github.com/kengz/aiva/blob/master/scripts/translate.js#L5" target="_blank"><code>scripts/translate.js</code></a> quickly tests the translate function in `python`. Uncomment and run it.
 
 
 ```javascript
@@ -339,7 +339,7 @@ global.gPass({
 ```
 
 <aside class="success">
-For development like above, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
 </aside>
 
 >Note due to how a module is called using `msg.to, msg.intent`, you must ensure that the functions are named properly, and `Ruby`'s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. `lib/rb/Hello.rb` for the `Hello` module.
@@ -358,9 +358,9 @@ The entry point is always a `js` interface script, but luckily we have made it t
 
 Overall, there are 2 ways to connect with `lib` modules:
 
-**global.gPass**: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> This is a global method to pass a `msg`. It generates a `hash` using `lib/hasher.js` with a `Promise`, which is resolved whenever the `js` client receives a valid reply `msg` with same `hash`. This method returns the resolved `Promise` with that `msg` for chaining.
+**global.gPass**: <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_py.js" target="_blank"><code>scripts/hello_py.js</code></a> This is a global method to pass a `msg`. It generates a `hash` using `lib/hasher.js` with a `Promise`, which is resolved whenever the `js` client receives a valid reply `msg` with same `hash`. This method returns the resolved `Promise` with that `msg` for chaining.
 
-**wrapped global.gPass**: <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/nlp.js" target="_blank"><code>lib/js/nlp.js</code></a> This is similar to above, but the `msg` is properly generated by a `js` lib module, resulting in a much cleaner and safer interface script. The lib module needs to be imported at the top to be used.
+**wrapped global.gPass**: <a href="https://github.com/kengz/aiva/tree/master/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>, <a href="https://github.com/kengz/aiva/tree/master/lib/js/nlp.js" target="_blank"><code>lib/js/nlp.js</code></a> This is similar to above, but the `msg` is properly generated by a `js` lib module, resulting in a much cleaner and safer interface script. The lib module needs to be imported at the top to be used.
 
 
 ### Data flow

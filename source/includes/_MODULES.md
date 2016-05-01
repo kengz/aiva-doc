@@ -43,7 +43,7 @@ A large part of it is powered by [spaCy](https://spacy.io), which is *"the faste
 
 Next we show an example of how a flight finder can benefit from it. For instance, it can get the `NER` or `noun_phrases` for the locations, time, person; the `time` for a normalized form of ISO time string; `NER_POS_TREE` to understand the dependencies, e.g. what's the origin and target destinations.
 
->The example in <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js#L5" target="_blank"><code>scripts/hello_ai.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.
+>The example in <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_ai.js#L5" target="_blank"><code>scripts/hello_ai.js</code></a> shows how the generic NLP module in <a href="https://github.com/kengz/aiva/tree/master/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> returns the result pulled from spaCy in Python, and Date.js in Node.js.
 
 
 ```javascript
@@ -199,11 +199,11 @@ SkFlow makes it very easy to use TensorFlow, and insanely fast to build a model.
 
 We show how you can deploy a neural net with AIVA, with a sample Deep Neural Network trained on the Titanic data.
 
-The TensorFlow (and other) AI models shall be grouped under <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a>. The top level <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> script will import from this folder for usage via Socket.io.
+The TensorFlow (and other) AI models shall be grouped under <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a>. The top level <a href="https://github.com/kengz/aiva/tree/master/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> script will import from this folder for usage via Socket.io.
 
->The Titanic DNN model can be trained using TensorFlow under <a href="https://github.com/kengz/aiva/blob/aiva-v3/lib/py/ais/dnn_titanic_train.py#L53" target="_blank"><code>lib/py/ais/dnn_titanic_train.py</code></a> after you uncomment and run it. It draws data from the sibling folder <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/data/" target="_blank"><code>lib/py/ais/data/</code></a>, and the model is saved to <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a>. 
+>The Titanic DNN model can be trained using TensorFlow under <a href="https://github.com/kengz/aiva/blob/master/lib/py/ais/dnn_titanic_train.py#L53" target="_blank"><code>lib/py/ais/dnn_titanic_train.py</code></a> after you uncomment and run it. It draws data from the sibling folder <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/data/" target="_blank"><code>lib/py/ais/data/</code></a>, and the model is saved to <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a>. 
 
->For deployment, <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> imports and exposes the methods in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a>. They can then be used to do predictions from the interface <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a>.
+>For deployment, <a href="https://github.com/kengz/aiva/tree/master/lib/py/ai.py" target="_blank"><code>lib/py/ai.py</code></a> imports and exposes the methods in <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a>. They can then be used to do predictions from the interface <a href="https://github.com/kengz/aiva/tree/master/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a>.
 
 >TensorFlow Titanic DNN on Slack:
 <img alt="Titanic DNN on Slack" src="./images/titanic_dnn.png" />
@@ -212,12 +212,12 @@ This demonstrates another AI component of AIVA; not only AI can power the bot, t
 
 | file/folder | details |
 |:---|---|
-| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_train.py" target="_blank">lib/py/ais/dnn_titanic_train.py</a> | Train and save the Titanic DNN model. |
-| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/data/" target="_blank">lib/py/ais/data/</a> | Folder for training and test data. |
-| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a> | Folder for the saved model for deployment. Will be created when new model is trained. |
-| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/" target="_blank">lib/py/ais/ai_lib/</a> | Library with helpers for the AI folder. |
-| <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a> | Deploy the DNN titatnic model. |
-| <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a> | Interface script for the deployed model. |
+| <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_train.py" target="_blank">lib/py/ais/dnn_titanic_train.py</a> | Train and save the Titanic DNN model. |
+| <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/data/" target="_blank">lib/py/ais/data/</a> | Folder for training and test data. |
+| <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/models/" target="_blank">lib/py/ais/models/</a> | Folder for the saved model for deployment. Will be created when new model is trained. |
+| <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/" target="_blank">lib/py/ais/ai_lib/</a> | Library with helpers for the AI folder. |
+| <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_deploy.py" target="_blank">lib/py/ais/dnn_titanic_deploy.py</a> | Deploy the DNN titatnic model. |
+| <a href="https://github.com/kengz/aiva/tree/master/scripts/dnn_titanic.js" target="_blank">scripts/dnn_titanic.js</a> | Interface script for the deployed model. |
 
 
 Yes, *you did just train a Deep Neural Network and deploy it on Slack for use*. The mythical creative of deep learning - now at your fingertips - is going to help you unleash a whole new world of possibilities. And that’s not all; remember, there is an entire package of every major type of machine learning tools, all included in AIVA. Next, we will go over them quickly, and leave you to explore them more deeply.
@@ -239,7 +239,7 @@ both of which are very popular Python machine learning libraries for techniques 
 
 [Indico.io](https://indico.io) is **the go-to machine learning API** for developers. It focuses on the most applicable and useful ML tools for [text and image analysis](https://indico.io/product). This complements the custom-trained models of TensorFlow, and is useful especially when your use case can readily be solved by standard ML models.
 
->The indico wrapper is grouped under the `ai` module. Remember to save your API key into the `.keys-` before using. A simple example can be found at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js#L18" target="_blank"><code>scripts/hello_ai.js</code></a>.
+>The indico wrapper is grouped under the `ai` module. Remember to save your API key into the `.keys-` before using. A simple example can be found at <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_ai.js#L18" target="_blank"><code>scripts/hello_ai.js</code></a>.
 
 ```javascript
 // js: scripts/hello_ai.js
@@ -249,12 +249,12 @@ ai.indico.sentiment(['indico is so easy to use!', 'Still really easy, yiss'])
 // [ 0.9782025594088044, 0.9895808115135271 ]
 ```
 
->We also add an interface script <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/hello_ai.js" target="_blank"><code>below that</code></a>, and demo it on Telegram. Of course the real application is likely backend oriented, such as gauging the quality of your customer service by analyzing their sentiment in chat.
+>We also add an interface script <a href="https://github.com/kengz/aiva/tree/master/scripts/hello_ai.js" target="_blank"><code>below that</code></a>, and demo it on Telegram. Of course the real application is likely backend oriented, such as gauging the quality of your customer service by analyzing their sentiment in chat.
 
 >Indico on Telegram:
 <img alt="Indico on Telegram" src="./images/indico.png" />
 
-With Indico.io, everything is done via its REST API or their [wrapper clients](https://indico.io/docs) - no model/training is needed. AIVA includes the [Node.js Indico.io wrapper](https://github.com/IndicoDataSolutions/IndicoIo-node), nested under the <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.
+With Indico.io, everything is done via its REST API or their [wrapper clients](https://indico.io/docs) - no model/training is needed. AIVA includes the [Node.js Indico.io wrapper](https://github.com/IndicoDataSolutions/IndicoIo-node), nested under the <a href="https://github.com/kengz/aiva/tree/master/lib/js/ai.js" target="_blank">lib/js/ai.js</a>.
 
 In fact, Indico is currently [state of the art](https://indico.io/news/121515_indico_SentimentHQ_Release) in sentiment analysis. All their APIs are very powerful and easy to use; they even explain the ML models employed for each, and the real-world use cases of each.
 
@@ -269,7 +269,7 @@ Autoplanning is vital for a bot to be able to function on its own without being 
 
 Here's a slightly different approach: for every function we allow the bot to do, we only define the function and its needed arguments. For calling a number it'd be `function = dial, args = [number]`. With a knowledge base and autoplanning, the input "call my wife" will be parsed into `function = dial`, `args = [number]`. Since it's only given a `person`, it can use the knowledge base to trace the connection `person -[has]-> number`, and proceed to retrieve the needed information from memory. The bot can use its own knowledge to plan and execute the function autonomously.
 
-This is a pretty advanced feature that's still being implemented for AIVA. It is based on the theoretical proofs and outlines for a generic interface [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md).
+This is a pretty advanced feature that's still being implemented for AIVA. It is based on the theoretical proofs and outlines for a generic interface [HTMI](https://github.com/kengz/aiva/tree/master/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/master/docs/CGKB.md).
 
 AIVA comes with 3 knowledge bases, from generic to local: 
 
@@ -287,41 +287,41 @@ We discussed the [graph brain](#graph-brain) above, known as [`neo4jKB`](https:/
 
 This serves as the local knowledge and the central memory system. It is the reason AIVA can behave as one consistent entity across different chat platforms. All of the memory-dependent tasks shall be read from and write to the brain.
 
-AIVA uses the brain for user serialization, standardized in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/user.js" target="_blank"><code>lib/js/user.js</code></a> and called automatically on start from <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/serialize_users.js" target="_blank"><code>scripts/serialize_users.js</code></a>. It will match up the multiple identities of a same user from different platforms. You can see all the serialized user nodes on neo4j's browser interface at `http://localhost:7474/` if you are running locally, or use [SSH forwarding described here](#ssh-browser-forwarding).
+AIVA uses the brain for user serialization, standardized in <a href="https://github.com/kengz/aiva/tree/master/lib/js/user.js" target="_blank"><code>lib/js/user.js</code></a> and called automatically on start from <a href="https://github.com/kengz/aiva/tree/master/scripts/serialize_users.js" target="_blank"><code>scripts/serialize_users.js</code></a>. It will match up the multiple identities of a same user from different platforms. You can see all the serialized user nodes on neo4j's browser interface at `http://localhost:7474/` if you are running locally, or use [SSH forwarding described here](#ssh-browser-forwarding).
 
 >The serialized users in AIVA's neo4jKB graph brain:
 <img alt="Users in brain" src="./images/serialized_users.png" />
 
-The todo list feature is another relevant example. The todo items are connected to their owner. The module logic for neo4jKB is defined in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/todo.js" target="_blank"><code>lib/js/todo.js</code></a>.
+The todo list feature is another relevant example. The todo items are connected to their owner. The module logic for neo4jKB is defined in <a href="https://github.com/kengz/aiva/tree/master/lib/js/todo.js" target="_blank"><code>lib/js/todo.js</code></a>.
 
 >The todos belonging to a user as connected unit of information, in AIVA's neo4jKB graph brain:
 <img alt="User todos" src="./images/user_todo.png" />
 
-These two examples show briefly how to use neo4jKB for AIVA's modules, to help you get started. On our roadmap, we plan to complete the auto-parsing NLP module that automatically canonicalize knowledge from user input, so you don't have to write the define the knowledge yourself. This is closely related to the **autoplanning** of the [knowledge base feature](#kbase), and is part of [HTMI](https://github.com/kengz/aiva/tree/aiva-v3/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/aiva-v3/docs/CGKB.md).
+These two examples show briefly how to use neo4jKB for AIVA's modules, to help you get started. On our roadmap, we plan to complete the auto-parsing NLP module that automatically canonicalize knowledge from user input, so you don't have to write the define the knowledge yourself. This is closely related to the **autoplanning** of the [knowledge base feature](#kbase), and is part of [HTMI](https://github.com/kengz/aiva/tree/master/docs/HTMI.md) and a brain [CGKB](https://github.com/kengz/aiva/tree/master/docs/CGKB.md).
 
 See [neo4jKB](https://github.com/kengz/neo4jKB) for documentation.
 
 
 ## <a name="#google-api"></a>Google APIs
 
-Google APIs are grouped under the `ai` module because many of them are actually AI or powered by AI. <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/google.js" target="_blank"><code>lib/js/ais/google.js</code></a> imports the [Google APIs Node.js client](https://github.com/google/google-api-nodejs-client). Not all of the APIs are initialized, you'd have to activate each one as you wish to use on [Google API Manager](https://console.developers.google.com) and in `lib/js/ais/google.js`.
+Google APIs are grouped under the `ai` module because many of them are actually AI or powered by AI. <a href="https://github.com/kengz/aiva/tree/master/lib/js/ais/google.js" target="_blank"><code>lib/js/ais/google.js</code></a> imports the [Google APIs Node.js client](https://github.com/google/google-api-nodejs-client). Not all of the APIs are initialized, you'd have to activate each one as you wish to use on [Google API Manager](https://console.developers.google.com) and in `lib/js/ais/google.js`.
 
 <aside class="notice">
 You must "enable APIs" from Google API Manager for your Google API key to use them.
 </aside>
 
-We have seen Knowledge Graph Search earlier; Google Search actually uses a [npm module google](https://www.npmjs.com/package/google) powered by a scraper, so it is free without quota. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/google.js" target="_blank"><code>scripts/google.js</code></a>. Google Translate and language detection are also based on a scraper, in <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a> and is free without quota as well. The interface script is at <a href="https://github.com/kengz/aiva/tree/aiva-v3/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>.
+We have seen Knowledge Graph Search earlier; Google Search actually uses a [npm module google](https://www.npmjs.com/package/google) powered by a scraper, so it is free without quota. The interface script is at <a href="https://github.com/kengz/aiva/tree/master/scripts/google.js" target="_blank"><code>scripts/google.js</code></a>. Google Translate and language detection are also based on a scraper, in <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a> and is free without quota as well. The interface script is at <a href="https://github.com/kengz/aiva/tree/master/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a>.
 
 See [google API Nodejs client](https://github.com/google/google-api-nodejs-client) for their documentation.
 
 
 ## <a name="watson"></a>IBM Watson
 
-IBM Watson is a collection of cognitive computing tools. AIVA's `ai` module includes the IBM Watson Node.js client at <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a>.
+IBM Watson is a collection of cognitive computing tools. AIVA's `ai` module includes the IBM Watson Node.js client at <a href="https://github.com/kengz/aiva/tree/master/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a>.
 
 To use Watson, you need to register at [IBM Watson Bluemix](http://www.ibm.com/cloud-computing/bluemix/watson/), activate the API you want, and get the individual credentials `<username>:<password>`. Note that the credentials are distinct for each API you activate.
 
-Then, add the credentials in `bin/.keys-aiva` and `bin/.keys-aivadev` with the format `WATSON_<API-NAME>_CRED=<username>:<password>`, for example `WATSON_PERSONALITY_INSIGHTS_CRED=<username>:<password>` for Personality Insights. The <a href="https://github.com/kengz/aiva/tree/aiva-v3/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a> module will automatically read the environment variable and activate the function for your usage.
+Then, add the credentials in `bin/.keys-aiva` and `bin/.keys-aivadev` with the format `WATSON_<API-NAME>_CRED=<username>:<password>`, for example `WATSON_PERSONALITY_INSIGHTS_CRED=<username>:<password>` for Personality Insights. The <a href="https://github.com/kengz/aiva/tree/master/lib/js/ais/watson.js" target="_blank"><code>lib/js/ais/watson.js</code></a> module will automatically read the environment variable and activate the function for your usage.
 
 See the [Watson node sdk](https://github.com/watson-developer-cloud/node-sdk) for their documentation.
 

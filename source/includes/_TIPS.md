@@ -4,7 +4,7 @@
 
 `npm run gi` runs the following in sequence:
 
-- the shell setup script in <a href="https://github.com/kengz/aiva/tree/aiva-v3/bin/install" target="_blank"><code>bin/install</code></a>
+- the shell setup script in <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>
 - `npm install`
 - `pip3 install -r requirements.txt`
 - `bundle install`
@@ -21,9 +21,9 @@ AIVA uses [`forever`](https://github.com/foreverjs/forever) to keep-alive (with 
 
 ## <a name="ngrok"></a>Webhook using ngrok
 
-You don't need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/aiva-v3/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at [`http://localhost:4040`](http://localhost:4040) after AIVA is run.
+You don't need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/master/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at [`http://localhost:4040`](http://localhost:4040) after AIVA is run.
 
-Note that for each adapter, if it needs a webhook, you need to specify the `PORT` and the environment key for the webhook, at the top of <a href="https://github.com/kengz/aiva/blob/aiva-v3/index.js" target="_blank"><code>index.js</code></a> in variables `adapterPorts`, `adapterWebhookKey`.
+Note that for each adapter, if it needs a webhook, you need to specify the `PORT` and the environment key for the webhook, at the top of <a href="https://github.com/kengz/aiva/blob/master/index.js" target="_blank"><code>index.js</code></a> in variables `adapterPorts`, `adapterWebhookKey`.
 
 ```javascript
 // js: index.js
@@ -98,7 +98,7 @@ Then you can go to `http://localhost:8080/` on your local browser.
 
 ## <a name="dependencies"></a>Dependencies
 
-All the system dependencies are installed automatically by running `npm run gi`, which executes <a href="https://github.com/kengz/aiva/tree/aiva-v3/bin/install" target="_blank"><code>bin/install</code></a>. If you'd like to setup your VM manually, see/edit the setup script; below is the (non-exhaustive) list:
+All the system dependencies are installed automatically by running `npm run gi`, which executes <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>. If you'd like to setup your VM manually, see/edit the setup script; below is the (non-exhaustive) list:
 
 - `node.js >v5.x`
 - `java jdk >7, export $JAVA_HOME path`
