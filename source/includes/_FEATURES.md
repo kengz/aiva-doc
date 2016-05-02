@@ -43,6 +43,11 @@ These special messages can be sent via `robot.adapter.customMessage(attachments)
 See [adapters](#adapters) for more.
 
 
+<aside class="notice">
+Implementation is complete for Slack, Telegram, but partial for Facebook adapter since it's quite new. We are working with the adapter's author to complete this very soon - will be done in the next release soon.
+</aside>
+
+
 ## <a name="graph-brain"></a>graph brain
 
 The brain of AIVA is a graph database; it is the central memory that coordinates with different adapters, allowing it to be consistent across the platforms; for example, it can remember who you are or your todo list, even as you switch apps.
@@ -55,6 +60,11 @@ AIVA uses [`neo4jKB`](https://github.com/kengz/neo4jKB) as the brain - a knowled
 
 <aside class="notice">
 Neo4jKB is a completed project. Currently it is used for user-recognition and user todo list. AIVA doesn't fully utilize Neo4jKB yet as the AI tools are under development. When done, AIVA will be able to automatically form and extract knowledge from the graph brain.
+</aside>
+
+
+<aside class="notice">
+User serialization that depends on the brain is complete for Slack, but partial for Telegram, Facebook. They will be done in the next release soon.
 </aside>
 
 
