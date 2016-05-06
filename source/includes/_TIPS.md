@@ -42,7 +42,7 @@ var adapterPorts = {
 // process.env.<key> to set webhook for adapter
 var adapterWebhookKey = {
   telegram: 'TELEGRAM_WEBHOOK',
-  fb: 'FB_WEBHOOK'
+  fb: 'FB_WEBHOOK_BASE'
 }
 ```
 
