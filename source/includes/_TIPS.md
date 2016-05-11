@@ -15,6 +15,12 @@ It's save to run multiple times; they'll just update. The shell install script i
 
 All bot deployment commands are wrapped with `npm` inside `package.json`. For more novice users, you can customize the `scripts` in `package.json`. For example, changing "aiva" and "aivadev" to your bot name of choice.
 
+## Different Botname
+
+Sometimes you just can't use the bot name across platforms - maybe it's already taken, or they require a "bot" word be added to it. 
+
+For all adapters, `process.env.BOTNAME` defaults to the name after "-" in `.keys-<botname>`. You can change this by providing in there an env variable `<ADAPTER>_BOTNAME`, e.g. `TELEGRAM_BOTNAME=AIVAthebot`.
+
 ## Monitoring
 
 AIVA uses [`forever`](https://github.com/foreverjs/forever) to keep-alive (with 10 max restarts). `npm start` runs the process in the background, with it stdout logs written to `/logs`. `npm run debug` runs the same thing except it logs stdout to the terminal.
