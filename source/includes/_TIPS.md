@@ -19,7 +19,7 @@ curl -sL https://deb.nodesource.com/setup_6.x | bash -
 sudo apt-get install -y nodejs
 ```
 
-Note that a Digital Ocean instance may initialize with insufficient swap memory. Here's how you can boost it:
+If your Digital Ocean instance has insufficient swap memory, boost it:
 
 ```shell
 # Ensure you have enough swap memory. Typically you'd have to run this
@@ -89,6 +89,7 @@ If you're not using Docker, you need to run `npm run gi` manually.
 
 ## Custom deployment
 
+
 All bot deployment commands are wrapped with `npm` inside `package.json`. For more novice users, you can customize the `scripts` in `package.json`. For example, changing "aiva" and "aivadev" to your bot name of choice.
 
 
@@ -108,7 +109,24 @@ AIVA uses [`supervisord`] with Docker, and [`forever`](https://github.com/foreve
 Additionally, the non-bot logs are written to `/var/log/` for `supervisor`, `nginx` and `neo4j` in Docker.
 
 
-## <a name="docker-port"></a>Docker port forwarding
+## <a name="dockerization"></a>Dockerization
+
+*Advanced users can use this section to configure and extend AIVA.*
+
+With some spirit of try-hard devops, we package the Docker image so it follows common deployment practices. Below are the primary processes that are ran in the Docker container, and the relevant config files. They package the original AIVA that is ran on a local machine into Docker.
+
+- `supervisord`, with `bin/supervisord.conf`: The main entry-point process that runs everything else. Logs output to the main bash session started by `npm start`
+- `nginx`, with `bin/nginx.conf`: Helps expose the Docker port to the host machine and the outside world. See [Docker Port-forwarding](#docker-port) for how it's done.
+
+Helper bash scripts for running [Commands](#commands);
+
+- `bin/start.sh` ran by `npm start`: start a container in `production` or `development` environment, with the primary bash session to use `supervisord` only.
+- `bin/enter.sh` ran by `npm run enter`: start a parallel non-primary bash session to enter the container.
+- `bin/stop.sh` ran by `npm stop`: stop a container and the bot inside.
+- `bin/reset.sh` ran by `npm run reset`: stop and remove a container, so you can create a fresh one with `npm start` if shit goes wrong.
+
+
+## <a name="docker-port"></a>Docker Port-forwarding
 
 In the uncommon case where you need to expose a port from Docker, there are 4 steps:
 
@@ -120,7 +138,7 @@ In the uncommon case where you need to expose a port from Docker, there are 4 st
 
 ## <a name="ngrok"></a>Webhook using ngrok
 
-You don't need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/master/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at [`http://localhost:4040`](http://localhost:4040) after AIVA is run.
+You don't need to specify any webhook urls; they are set up automatically in <a href="https://github.com/kengz/aiva/blob/master/index.js#L86" target="_blank"><code>index.js with ngrok</code></a>. Access the ngrok interface at [`http://localhost:4040`](http://localhost:4040) (production) or [`http://localhost:4041`](http://localhost:4041) (development) after AIVA is run.
 
 Note that for each adapter, if it needs a webhook, you need to specify the `PORT` and the environment key for the webhook, at the top of <a href="https://github.com/kengz/aiva/blob/master/index.js" target="_blank"><code>index.js</code></a> in variables `adapterPorts`, `adapterWebhookKey`.
 
@@ -190,7 +208,7 @@ neo4j start
 curl -X POST -d "password=YOUR_NEW_PASSWORD" -u neo4j:<OLD_PSWD> http://localhost:7474/user/neo4j/password
 ```
 
-Access the Neo4j browser GUI at [`http://localhost:7474`](http://localhost:7474)
+Access the Neo4j browser GUI at [`http://localhost:7474`](http://localhost:7474) (production) or [`http://localhost:7476`](http://localhost:7476) (development)
 
 ## SSH Browser-forwarding
 

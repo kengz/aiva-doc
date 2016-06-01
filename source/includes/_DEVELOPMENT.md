@@ -22,6 +22,8 @@ For Dockers, there are 2 containers: `aiva-production` and `aiva-development`, w
 
 All the commands/scripts are compatible for use with/without Docker. The Docker image syncs the repo volume, so you can edit the source code and run the terminal commands as usual. The shell will enter a Docker container and run the same thing as it would on a local machine, so you can barely feel the difference when developing.
 
+See [Dockerization](#dockerization) for how AIVA is packaged into Docker.
+
 The commands run Docker if the image `kengz/aiva` is pulled, otherwise they run locally without entering a Docker container. We'll list them separately for clarity:
 
 #### <a name="commands"></a>Commands (with Docker)
@@ -36,6 +38,11 @@ npm test # run unit tests
 npm run enter # enter a parallel bash session in the Docker container
 npm run reset # stop and remove the container
 ```
+
+<aside class="notice">
+<code>npm start</code> launches the primary bash session, which is used only for <code>supervisord</code>. Use <code>npm run enter</code> to launch parallel bash sessions for all other purposes.
+</aside>
+
 
 #### Commands (without Docker)
 

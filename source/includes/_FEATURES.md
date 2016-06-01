@@ -6,6 +6,7 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 | Feature | Implemented? |
 |:---|---|
 | [fast setup](#setup2) | yes |
+| [docker](#docker) | yes |
 | [cross-platform](#cross-platform) | implementing |
 | [customMessage](#custom-msg) | pending |
 | [graph brain](#graph-brain) | improving |
@@ -19,6 +20,13 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 [3 steps](#setup) to get a bot installed and running. It once took me just 15 seconds to deploy a bot for an unexpected demo. 
 
 *P/S "fast" implies the least number of steps; dependency installation can be heavy and long.*
+
+
+## <a name="docker"></a>Docker
+
+Complex projects tend to be difficult to install and distribute. Docker has become a preferred solution, especially for heavy machine learning projects. Docker also provides a fast and safe development environment through containerization.
+
+AIVA is quite heavy on dependencies, understandably. So we've add an AIVA docker image `kengz/aiva` since `v3.2.0`, and development is seamless with it.
 
 
 ## <a name="cross-platform"></a>cross-platform
