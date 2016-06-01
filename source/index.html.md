@@ -19,7 +19,7 @@ includes:
 search: true
 ---
 
-# AIVA [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/aiva.svg)](https://gemnasium.com/kengz/aiva) <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+# AIVA [![GitHub version](https://badge.fury.io/gh/kengz%2Faiva.svg)](http://badge.fury.io/gh/kengz%2Faiva) [![Build Status](https://travis-ci.org/kengz/aiva.svg?branch=master)](https://travis-ci.org/kengz/aiva) [![Coverage Status](https://coveralls.io/repos/github/kengz/aiva/badge.svg?branch=master)](https://coveralls.io/github/kengz/aiva?branch=master) [![Dependency Status](https://gemnasium.com/kengz/aiva.svg)](https://gemnasium.com/kengz/aiva) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
 
 **AIVA** (A.I. Virtual Assistant): General-purpose virtual assistant for developers.
 
@@ -49,6 +49,9 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 
 ## Installation
 
+You can run AIVA on your local machine or a Ubuntu server - [Digital Ocean](https://www.digitalocean.com) recommended. See [Docker installation](#docker-installation) if you're new to it, or the [alternate setups](#dependencies).
+
+
 1\. Fork this repo so you can pull the new releases later:
 
 &nbsp; &nbsp; <iframe src="https://ghbtns.com/github-btn.html?user=kengz&repo=aiva&type=fork&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
@@ -59,32 +62,22 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 git clone https://github.com/YOURUSERNAME/aiva.git
 ```
 
-Use **Ubuntu >14.04** or **MacOSX**; For the fastest VM setup, I recommend [Digital Ocean](https://www.digitalocean.com), with this automatic [setup script](https://github.com/kengz/mac_setup). Optionally for manual setup, see [Dependencies](#dependencies).
-
-
-
 ## <a name="setup"></a>Setup, Run
 
-### <a name="one-time-setup"></a>One-time Setup
-- **install dependencies**: (first installation may take ~20 mins, mainly due to the AI modules)
+- **dependencies**: Everything needed can be installed in one line with the [AIVA Docker image](https://hub.docker.com/r/kengz/aiva/):
 
 ```shell
-npm run gi
+docker pull kengz/aiva
 ```
 
 - **setup keys**: update `.env`, `bin/.key-aiva` (production), `bin/.key-aivadev` (development).
-
-<aside class="notice">
-If you prefer a different bot name, replace "aiva" from the <code>bin/.keys-</code> and in <code>package.json</code>.
-</aside>
 
 
 ### <a name="run"></a>Run
 - **run**: 
 
 ```shell
-npm start # runs aiva
-npm run debug # runs aivadev
+npm start # runs aivadev
 ```
 
 This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](#adapters) for connecting to different chat platforms.

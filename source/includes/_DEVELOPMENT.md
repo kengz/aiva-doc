@@ -7,25 +7,54 @@ It has a NLP parser and KB brain out of the box. We take care of the crucial bac
 Since it is a generic interface, you can focus on writing your app/module. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails to serve it.
 
 
-
 ### Production and Development
 
-Per common practice, we distinguish between production and development version, using `NODE_ENV` environment variables. So we generate two sets of keys for two bots:
+Per common practice, we distinguish between production and development version using `NODE_ENV` environment variables. So we generate two sets of keys for two bots:
 
 <aside class="success">
 Use "aiva" for production, "aivadev" for development. They can coexist without system conflicts.
 </aside>
 
+For Dockers, there are 2 containers: `aiva-production` and `aiva-development`, which provide good isolation. You can develop safely in parallel without needing to take down your deployed version.
+
+
+### Docker
+
+All the commands/scripts are compatible for use with/without Docker. The Docker image syncs the repo volume, so you can edit the source code and run the terminal commands as usual. The shell will enter a Docker container and run the same thing as it would on a local machine, so you can barely feel the difference when developing.
+
+The commands run Docker if the image `kengz/aiva` is pulled, otherwise they run locally without entering a Docker container. We'll list them separately for clarity:
+
+#### Using Docker
 
 ```shell
-# alternative commands
-forever list # see the list of bots running
-npm stop # stop all bots
-npm run debug # run aivadev, log to terminal
-npm run debug --bot=aiva # debug aiva
-npm run shell # fast dev, run aivadev with shell-adapter
+# All commands, uses `development` if not specified
+npm start # run aivadev (thru supervisord on Docker)
+npm start production # runs aiva
+# append `production` below as needed
+npm stop # stop the container along with the bots
 npm test # run unit tests
+npm run enter # enter a parallel bash session in the Docker container
+npm run reset # stop and remove the container
 ```
+
+#### Without Docker
+
+On your local machine without containerization:
+
+```shell
+# All commands, uses `development` if not specified
+npm start # run aivadev
+npm start production # runs aiva
+# append `production` below as needed
+npm stop # stop the bots
+npm test # run unit tests
+forever list # see the list of bots running
+```
+
+### Custom Dependencies
+
+The Docker containers on start will auto install any new dependencies specified in the right config files. They're listed in [Project Dependencies](#project-dependencies).
+
 
 ## <a name="polyglot"></a>Polyglot Environment
 

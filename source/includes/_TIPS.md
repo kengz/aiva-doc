@@ -1,21 +1,89 @@
 # <a name="setup-tips"></a>Setup tips
 
-## Setup script
+## <a name="docker-installation"></a>Docker installation
 
-`npm run gi` runs the following in sequence:
+[Docker](https://www.docker.com/) is a nice way to package and distribute complex modules, it also allows you to develop in safe isolated environment with containerization. 
 
-- the shell setup script in <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>
+The [AIVA Docker image](https://hub.docker.com/r/kengz/aiva/) (2Gb) comes ready-to-run for the repo source code. It includes all the needed components, e.g. the runtimes (nodejs, python, ruby, Java), Neo4j, the ML modules (Tensorflow, scikitlearn, scipy, numpy, spacy etc.). Depending on which OS you use, the setups are easy:
+
+### Ubuntu
+
+- Digital Ocean: The easiest, using their [Docker 1-click app on Ubuntu](https://www.digitalocean.com/features/one-click-apps/docker/). Docker comes installed with it.
+- Ubuntu from scratch: See [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) by Digital Ocean.
+
+Then, you need `nodejs` to run basic setup for entering Docker.
+
+```shell
+# Nodejs
+curl -sL https://deb.nodesource.com/setup_6.x | bash -
+sudo apt-get install -y nodejs
+```
+
+### Mac OSX
+
+Mac needs a VM driver on top to run Docker. Here's the complete Docker installation, with `nodejs`
+
+```shell
+# Install Homebrew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Install Cask
+brew install caskroom/cask/brew-cask
+# Install docker toolbox
+brew cask install dockertoolbox
+
+# create the docker machine. Note that 'default' is the vm name we will be using
+docker-machine create --driver virtualbox default
+# allocate resource for the docker machine when stopped
+VBoxManage modifyvm default --cpus 2 --memory 4096
+docker-machine start default
+
+# to use vm in terminal
+echo 'eval "$(docker-machine env default)"' >> ~/.bash_profile
+source ~/.bash_profile
+
+# Nodejs
+brew install node
+npm update npm -g
+```
+
+
+## <a name="dependencies"></a>System Dependencies
+
+Though not advised, you can skip Docker and develop on your machine directly without containerization. 
+
+- Use this automatic [setup script](https://github.com/kengz/mac_setup) for Ubuntu and MacOSX, 
+- run <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>. 
+- run `npm run gi`
+
+These install all the system and project dependencies automatically. There is a lot of components listed there for your inspection.
+
+
+## <a name="project-dependencies"></a>Project Dependencies
+
+You can save your project dependencies:
+
+- `package.json` for `node.js`
+- `requirements.txt` for `python`
+- `Gemfile` for `ruby`
+
+and the Docker container autoruns the installation script on every start: `npm run gi` runs the following in sequence:
+
 - `npm install`
 - `pip3 install -r requirements.txt`
 - `bundle install`
 
-It's save to run multiple times; they'll just update. The shell install script is necessary because ... just look at how many things get installed there.
+If you're not using Docker, you need to run `npm run gi` manually.
+
 
 ## Custom deployment
 
 All bot deployment commands are wrapped with `npm` inside `package.json`. For more novice users, you can customize the `scripts` in `package.json`. For example, changing "aiva" and "aivadev" to your bot name of choice.
 
+
 ## Different Botname
+
+
+If you prefer a different bot name, replace "aiva" from the `bin/.keys-` and in `package.json`.
 
 Sometimes you just can't use the bot name across platforms - maybe it's already taken, or they require a "bot" word be added to it. 
 
@@ -100,20 +168,3 @@ ssh -L 8080:localhost:7474 <remote_host>
 ```
 
 Then you can go to `http://localhost:8080/` on your local browser.
-
-
-## <a name="dependencies"></a>Dependencies
-
-All the system dependencies are installed automatically by running `npm run gi`, which executes <a href="https://github.com/kengz/aiva/tree/master/bin/install" target="_blank"><code>bin/install</code></a>. If you'd like to setup your VM manually, see/edit the setup script; below is the (non-exhaustive) list:
-
-- `node.js >v5.x`
-- `java jdk >7, export $JAVA_HOME path`
-- `neo4j >v2.3.0`
-- `neo4j shell tool`
-- `python3, pip3`
-- `setuptools virtualenvwrapper` (`pip3`)
-- `libatlas-dev libblas-dev gfortran` (`Linux apt-get`)
-- `numpy scipy tensorflow scikit-learn skflow pandas matplotlib` (`pip3`)
-- `ruby, bundler`
-- `forever, istanbul` (`npm -g`)
-
