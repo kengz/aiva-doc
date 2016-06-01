@@ -19,6 +19,18 @@ curl -sL https://deb.nodesource.com/setup_6.x | bash -
 sudo apt-get install -y nodejs
 ```
 
+Note that a Digital Ocean instance may initialize with insufficient swap memory. Here's how you can boost it:
+
+```shell
+# Ensure you have enough swap memory. Typically you'd have to run this
+# Setting 1Gb swap space.
+swapoff -a
+sudo dd if=/dev/zero of=/swapfile bs=1024 count=1024k
+sudo mkswap /swapfile
+sudo swapon /swapfile
+swapon -s
+```
+
 ### Mac OSX
 
 Mac needs a VM driver on top to run Docker. Here's the complete Docker installation, with `nodejs`

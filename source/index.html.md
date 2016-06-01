@@ -80,7 +80,7 @@ docker pull kengz/aiva
 npm start # runs aivadev
 ```
 
-This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](#adapters) for connecting to different chat platforms.
+See [Commands](#commands) for more. This will start AIVA with the default hubot adapters: Slack, Telegram, Facebook. See [**Adapters**](#adapters) for connecting to different chat platforms.
 
 >AIVA saying hi, translating, running deep neural net; on Slack, Telegram, Facebook:
 <img alt="AIVA on Slack, Telegram" src="./images/npm_start.png" />

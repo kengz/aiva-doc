@@ -24,7 +24,7 @@ All the commands/scripts are compatible for use with/without Docker. The Docker 
 
 The commands run Docker if the image `kengz/aiva` is pulled, otherwise they run locally without entering a Docker container. We'll list them separately for clarity:
 
-#### Using Docker
+#### <a name="commands"></a>Commands (with Docker)
 
 ```shell
 # All commands, uses `development` if not specified
@@ -37,7 +37,7 @@ npm run enter # enter a parallel bash session in the Docker container
 npm run reset # stop and remove the container
 ```
 
-#### Without Docker
+#### Commands (without Docker)
 
 On your local machine without containerization:
 
