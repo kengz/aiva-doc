@@ -94,16 +94,29 @@ All bot deployment commands are wrapped with `npm` inside `package.json`. For mo
 
 ## Different Botname
 
-
 If you prefer a different bot name, replace "aiva" from the `bin/.keys-` and in `package.json`.
 
 Sometimes you just can't use the bot name across platforms - maybe it's already taken, or they require a "bot" word be added to it. 
 
 For all adapters, `process.env.BOTNAME` defaults to the name after "-" in `.keys-<botname>`. You can change this by providing in there an env variable `<ADAPTER>_BOTNAME`, e.g. `TELEGRAM_BOTNAME=AIVAthebot`.
 
+
 ## Monitoring
 
-AIVA uses [`forever`](https://github.com/foreverjs/forever) to keep-alive (with 10 max restarts). `npm start` runs the process in the background, with it stdout logs written to `/logs`. `npm run debug` runs the same thing except it logs stdout to the terminal.
+AIVA uses [`supervisord`] with Docker, and [`forever`](https://github.com/foreverjs/forever) without Docker. Either way, the bot logs are written to `logs/`.
+
+Additionally, the non-bot logs are written to `/var/log/` for `supervisor`, `nginx` and `neo4j` in Docker.
+
+
+## <a name="docker-port"></a>Docker port forwarding
+
+In the uncommon case where you need to expose a port from Docker, there are 4 steps:
+
+- EXPOSE the port and its suggorate in `bin/Dockerfile`, then rebuild the Docker image for changes to apply.
+- define the reverse proxy for the port following the pattern in `bin/nginx.conf`
+- for MacOSX, add the ports for host-container port forwarding by Virtualbox in `bin/start.sh` above `VBoxManage controlvm ...`
+- publish the Docker port in `bin/start.sh` at `docker run ... -p <hostport>:<containerport>`
+
 
 ## <a name="ngrok"></a>Webhook using ngrok
 
@@ -113,15 +126,23 @@ Note that for each adapter, if it needs a webhook, you need to specify the `PORT
 
 ```javascript
 // js: index.js
-// some adapters need specific ports to work with
-var adapterPorts = {
+// list of all ports used, including for adapters
+var portList = {
   production: {
+    ngrok: '4040-4041',
+    neo4j: 7474,
+    socketIO: 6464,
+    slack: 8343,
     telegram: 8443,
-    fb: 8047
+    fb: 8543
   },
   development: {
+    ngrok: '4040-4041',
+    neo4j: 7476,
+    socketIO: 6466,
+    slack: 8345,
     telegram: 8443,
-    fb: 8049
+    fb: 8545
   }
 }
 
@@ -144,10 +165,10 @@ FB_WEBHOOK=https://aivabot.ngrok.com
 
 # ... AIVA is run, Telegram is given a random url
 # stdout log
-[ telegram webhook url:  https://aivabot.ngrok.io at PORT: 8443 ]
-Deploy aivadev with telegram
-[ fb webhook url:  https://86eb7da1.ngrok.io at PORT: 8049 ]
-Deploy aivadev with fb
+[Wed Jun 01 2016 12:02:33 GMT+0000 (UTC)] INFO telegram webhook url:  https://ddba2b46.ngrok.io at PORT: 8443
+[Wed Jun 01 2016 12:02:33 GMT+0000 (UTC)] INFO Deploy bot: AIVAthebot with adapter: telegram
+[Wed Jun 01 2016 12:02:33 GMT+0000 (UTC)] INFO fb webhook url:  https://aivadev.ngrok.io at PORT: 8545
+[Wed Jun 01 2016 12:02:33 GMT+0000 (UTC)] INFO Deploy bot: aivadev with adapter: fb
 ```
 
 <aside class="notice">
