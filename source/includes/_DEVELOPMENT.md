@@ -26,7 +26,7 @@ See [Dockerization](#dockerization) for how AIVA is packaged into Docker.
 
 The commands run Docker if the image `kengz/aiva` is pulled, otherwise they run locally without entering a Docker container. We'll list them separately for clarity:
 
-#### <a name="commands"></a>Commands (with Docker)
+### <a name="commands"></a>Commands (with Docker)
 
 ```shell
 # All commands, uses `development` if not specified
@@ -44,7 +44,7 @@ npm run reset # stop and remove the container
 </aside>
 
 
-#### Commands (without Docker)
+### Commands (without Docker)
 
 On your local machine without containerization:
 
@@ -92,8 +92,8 @@ global.gPass = client.gPass
 
 global.gPass({
   input: "hola amigos",
-  to: 'ai.py',
-  intent: 'nlp.translate'
+  to: 'nlp.py',
+  intent: 'translate'
 }).then(console.log)
 // hello friends
 ```
@@ -240,8 +240,8 @@ global.gPass = client.gPass
 
 global.gPass({
   input: "hola amigos",
-  to: 'ai.py',
-  intent: 'nlp.translate'
+  to: 'nlp.py',
+  intent: 'translate'
 }).then(console.log)
 // hello friends
 ```
@@ -368,8 +368,8 @@ global.gPass = client.gPass
 
 global.gPass({
   input: "hola amigos",
-  to: 'ai.py',
-  intent: 'nlp.translate'
+  to: 'nlp.py',
+  intent: 'translate'
 }).then(console.log)
 // hello friends
 ```

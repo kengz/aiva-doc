@@ -111,7 +111,10 @@ Additionally, the non-bot logs are written to `/var/log/` for `supervisor`, `ngi
 
 ## <a name="dockerization"></a>Dockerization
 
-*Advanced users can use this section to configure and extend AIVA.*
+
+<aside class="notice">
+Advanced users can use this section to configure and extend AIVA.
+</aside>
 
 With some spirit of try-hard devops, we package the Docker image so it follows common deployment practices. Below are the primary processes that are ran in the Docker container, and the relevant config files. They package the original AIVA that is ran on a local machine into Docker.
 

@@ -49,8 +49,6 @@ AIVA gives you powerful bot tools, saves you the time to build from scratch, and
 
 ## Installation
 
-You can run AIVA on your local machine or a Ubuntu server - [Digital Ocean](https://www.digitalocean.com) recommended. See [Docker installation](#docker-installation) if you're new to it, or the [alternate setups](#dependencies).
-
 
 1\. Fork this repo so you can pull the new releases later:
 
@@ -64,7 +62,9 @@ git clone https://github.com/YOURUSERNAME/aiva.git
 
 ## <a name="setup"></a>Setup, Run
 
-- **dependencies**: Everything needed can be installed in one line with the [AIVA Docker image](https://hub.docker.com/r/kengz/aiva/):
+You can run AIVA on your local machine or a Ubuntu server - [Digital Ocean](https://www.digitalocean.com) recommended. See [Docker installation](#docker-installation) if you're new to it, or the [alternate setups](#dependencies).
+
+- **dependencies**: Pull the [AIVA Docker image](https://hub.docker.com/r/kengz/aiva/):
 
 ```shell
 docker pull kengz/aiva

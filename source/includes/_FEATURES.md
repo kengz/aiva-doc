@@ -26,7 +26,11 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 
 Complex projects tend to be difficult to install and distribute. Docker has become a preferred solution, especially for heavy machine learning projects. Docker also provides a fast and safe development environment through containerization.
 
-AIVA is quite heavy on dependencies, understandably. So we've add an AIVA docker image `kengz/aiva` since `v3.2.0`, and development is seamless with it.
+```shell
+docker pull kengz/aiva
+```
+
+AIVA is quite heavy on dependencies, understandably. So we've add an [AIVA docker image `kengz/aiva`](https://hub.docker.com/r/kengz/aiva/) since `v3.2.0`, and development is seamless with it. See [Docker installation](#docker-installation).
 
 
 ## <a name="cross-platform"></a>cross-platform
