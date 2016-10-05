@@ -13,6 +13,8 @@ includes:
   - ADAPTERS
   - DEVELOPMENT
   - TIPS
+  - HTMI
+  - CGKB
   - CHANGELOG
   - CONTRIBUTING
 
