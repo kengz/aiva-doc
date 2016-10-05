@@ -2,8 +2,6 @@
 
 AIVA is created as an A.I. general purpose interface for developers. You can implement any features, use it simultaneously on the major platforms, and code in multiple languages. This solves the problem that many bots out there are are too specific, often bounded to one chat platform, and can only be developed in one language.
 
-It has a NLP parser and KB brain out of the box. We take care of the crucial backend and system, so *developers can focus on things that matter*.
-
 Since it is a generic interface, you can focus on writing your app/module. When done, plugging it into AIVA shall be way more trivial than writing a whole app with a MEAN stack or Rails to serve it.
 
 
@@ -15,48 +13,38 @@ Per common practice, we distinguish between production and development version u
 Use "aiva" for production, "aivadev" for development. They can coexist without system conflicts.
 </aside>
 
-For Dockers, there are 2 containers: `aiva-production` and `aiva-development`, which provide good isolation. You can develop safely in parallel without needing to take down your deployed version.
+### <a name="commands"></a>Commands
 
+All the commands are coded through `package.json` and can be ran from `npm`:
+
+```shell
+npm start # run development mode 'aivadev'
+npm start --debug # activate debug logger
+npm start production # runs production mode 'aiva'
+npm stop # stop the bots
+npm test # run unit tests
+forever list # see the list of bots running
+```
 
 ### Docker
 
 All the commands/scripts are compatible for use with/without Docker. The Docker image syncs the repo volume, so you can edit the source code and run the terminal commands as usual. The shell will enter a Docker container and run the same thing as it would on a local machine, so you can barely feel the difference when developing.
 
+For Dockers, there are 2 containers: `aiva-production` and `aiva-development`, which provide good isolation. You can develop safely in parallel without needing to take down your deployed version.
+
 See [Dockerization](#dockerization) for how AIVA is packaged into Docker.
 
-The commands run Docker if the image `kengz/aiva` is pulled, otherwise they run locally without entering a Docker container. We'll list them separately for clarity:
-
-### <a name="commands"></a>Commands (with Docker)
+Everything runs pretty much the same with Docker, except for a layer of wrapped abstractions. There are some extra commands for Docker:
 
 ```shell
-# All commands, uses `development` if not specified
-npm start # run aivadev (thru supervisord on Docker)
-npm start production # runs aiva
-# append `production` below as needed
-npm stop # stop the container along with the bots
-npm test # run unit tests
 npm run enter # enter a parallel bash session in the Docker container
 npm run reset # stop and remove the container
 ```
 
 <aside class="notice">
-<code>npm start</code> launches the primary bash session, which is used only for <code>supervisord</code>. Use <code>npm run enter</code> to launch parallel bash sessions for all other purposes.
+For Docker, <code>npm start</code> launches the primary bash session, which is used only for <code>supervisord</code>. Use <code>npm run enter</code> to launch parallel bash sessions for all other purposes.
 </aside>
 
-
-### Commands (without Docker)
-
-On your local machine without containerization:
-
-```shell
-# All commands, uses `development` if not specified
-npm start # run aivadev
-npm start production # runs aiva
-# append `production` below as needed
-npm stop # stop the bots
-npm test # run unit tests
-forever list # see the list of bots running
-```
 
 ### Custom Dependencies
 
@@ -69,8 +57,11 @@ The Docker containers on start will auto install any new dependencies specified 
 
 For now we have `/lib/client.{js, py, rb}`. Feel free to add `Socket.io` client for more languages through pull request!
 
+<aside class="notice">
+Note that the examples below are no longer included, but can be found in aiva v3.2.1
+</aside>
 
->For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js` with:
+>For quick multilingual dev, you can start the **polyglot server** at `src/start-io.js` with:
 
 ```shell
 # shell: start the polyglot server
@@ -87,7 +78,7 @@ This is automatically run with <code>npm run</code>, so don't manual-run it befo
 
 ```javascript
 // js: scripts/translate.js
-var client = require('../client.js')
+const client = require('../client.js')
 global.gPass = client.gPass
 
 global.gPass({
@@ -99,7 +90,7 @@ global.gPass({
 ```
 
 <aside class="success">
-For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>config/</code> if not already.
 </aside>
 
 
@@ -224,7 +215,7 @@ What this means is you can call a **module** (`to`) by its name, and its **funct
 
 In fact, <a href="https://github.com/kengz/aiva/tree/master/scripts/translate.js" target="_blank"><code>scripts/translate.js</code></a> does just that. It uses Socket.io to call the <a href="https://github.com/kengz/aiva/tree/master/lib/py/nlp.py" target="_blank"><code>lib/py/nlp.py</code></a>, which imports <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/ai_lib/translate.py" target="_blank"><code>lib/py/ais/ai_lib/translate.py</code></a>
 
->To test-run it, you can start the **polyglot server** at `lib/io_start.js` with:
+>To test-run it, you can start the **polyglot server** at `src/start-io.js` with:
 
 ```shell
 # shell: start the polyglot server
@@ -235,7 +226,7 @@ npm run server
 
 ```javascript
 // js: scripts/translate.js
-var client = require('../client.js')
+const client = require('../client.js')
 global.gPass = client.gPass
 
 global.gPass({
@@ -342,7 +333,7 @@ Socket.io can send deeply nested JSON with standard data type.
 ### Server
 There is a socket.io server that extends Hubot's Express.js server: <a href="https://github.com/kengz/aiva/tree/master/lib/io_server.js" target="_blank"><code>lib/io_server.js</code></a>. All `msg`s go through it. For example, let `msg.to = 'hello.py', msg.intent = 'sayHi'`. The server splits this into `module = 'hello', lang = 'py'`, modifies `msg.to = module`, then sends the `msg` to the client of `lang`.
 
->For quick multilingual dev, you can start the **polyglot server** at `lib/io_start.js` with:
+>For quick multilingual dev, you can start the **polyglot server** at `src/start-io.js` with:
 
 ```shell
 # shell: start the polyglot server
@@ -363,7 +354,7 @@ For each language, there is a socket.io client that imports all modules of its l
 
 ```javascript
 // js: scripts/translate.js
-var client = require('../client.js')
+const client = require('../client.js')
 global.gPass = client.gPass
 
 global.gPass({
@@ -375,7 +366,7 @@ global.gPass({
 ```
 
 <aside class="success">
-For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>bin/.keys-aivadev</code> if not already.
+For development like above, <a href="https://github.com/kengz/aiva/tree/master/lib/client.js#L85" target="_blank"><code>lib/client.js</code></a> will automatically set the environment variables using <code>config/</code> if not already.
 </aside>
 
 >Note due to how a module is called using `msg.to, msg.intent`, you must ensure that the functions are named properly, and `Ruby`'s requirement that module be capitalized implies that you have to name the file with the same capitalization, e.g. `lib/rb/Hello.rb` for the `Hello` module.
@@ -427,14 +418,14 @@ What goes where:
 
 | Folder/File | Purpose |
 |:---|---|
-| bin/ | bot keys, binaries, bash setup scripts. |
+| bin/ | Binary executables |
+| config/ | credentials |
+| db/ | Database migration files, models |
 | lib/&lt;lang&gt;/ | Module scripts, grouped by language, callable via socket.io. See [Polyglot Development](#polyglot-dev). |
-| lib/client.&lt;lang&gt; | Import all scripts from `lib/<lang>/` and expose them to socket.io for cross-language communication. |
-| lib/io_start.js | socket.io server and client logic for cross-language communication. |
+| src/ | core bot logic |
 | logs | Logs from bot for debugging and healthcheck. |
 | scripts | The `node.js` user interface for the `lib/` modules. |
 | scripts/_init.js | Kicks off AIVA setups after the base Hubot is constructed, before other scripts are lodaded. |
 | test | Unit tests; uses Mocha. |
-| .env | Non-bot-specific environment variables. |
 | external-scripts.json | You can [load Hubot npm modules](https://github.com/github/hubot/blob/master/docs/scripting.md#script-loading) by specifying them in here and `package.json`. | Specifies project dependencies and command shortcuts with npm. |
 

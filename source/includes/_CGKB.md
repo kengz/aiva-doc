@@ -1,4 +1,4 @@
-# Contextual Graph Knowledge Base
+# <a name="cgkb"></a>Contextual Graph Knowledge Base
 
 We present *Contextual Graph Knowledge Base (CGKB)* as the TM memory implementation of *HTMI*. This shall be consistent with design outlines of *HTMI*
 

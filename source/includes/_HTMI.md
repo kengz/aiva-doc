@@ -1,4 +1,4 @@
-# Human-Turing Machine Interface
+# <a name="htmi"></a>Human-Turing Machine Interface
 
 We present *Human-Turing Machine Interface (HTMI)* that is human-bounded Turing complete.
 

@@ -7,11 +7,11 @@ This gives a top level overview of the features. See [Modules](#modules) to find
 |:---|---|
 | [fast setup](#setup2) | yes |
 | [docker](#docker) | yes |
-| [cross-platform](#cross-platform) | implementing |
+| [cross-platform](#cross-platform) | yes |
 | [customMessage](#custom-msg) | pending |
-| [graph brain](#graph-brain) | improving |
+| [graph brain](#graph-brain) | pending |
 | [multi-language](#multi-language) | yes |
-| [built-in AI tools](#builtin-ai) | yes |
+| [AI tools](#builtin-ai) | yes |
 | [theoretical power](#theoretical) | yes |
 
 
@@ -68,12 +68,6 @@ Graph is a very generic and natural way of encoding information, especially for 
 
 Although graph and non-graph databases can both be Turing-complete, graphs tend to have a lower working complexity in practice, and it's data units can be schema-free. Turing completeness ensures that the database can do everything a computer supposedly can; lower complexity makes development easier, schema-free allows knowledge creation on-the-fly.
 
-AIVA uses [`neo4jKB`](https://github.com/kengz/neo4jKB) as the brain - a knowledge base implemented graph with [`neo4j`](http://neo4j.com). Specifically, `neo4jKB` imposes a [KB standard](https://github.com/kengz/neo4jKB#kb-standard-basic) on the graph for proper usage as a knowledge base.
-
-<aside class="notice">
-Neo4jKB is a completed project. Currently it is used for user-recognition and user todo list. AIVA doesn't fully utilize Neo4jKB yet as the AI tools are under development. When done, AIVA will be able to automatically form and extract knowledge from the graph brain.
-</aside>
-
 
 <aside class="notice">
 User serialization that depends on the brain is complete for Slack, but partial for Telegram, Facebook. They will be done in the next release soon.
@@ -87,11 +81,9 @@ User serialization that depends on the brain is complete for Slack, but partial 
 For more, see [Polyglot environment](#polyglot) and [Socket.io clients](#clients) for how it's done. We now support `node.js, python, ruby`.
 
 
-## <a name="builtin-ai"></a>built-in AI tools
+## <a name="builtin-ai"></a>AI tools
 
-AIVA comes with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. We have packaged these tools nicely, so you can get right into work with them. This saves you the tideous hunt, installation, and setup. 
-
-`lib/<lang>/ais/` contains the specific implementations of the AI modules/models, and `lib/<lang>/ai.<lang>` is the high-level script that imports the functions from `lib/<lang>/ais/` for usage.
+AIVA can be used with a set of well-rounded set AI/machine learning tools - each is the most advanced of its type. The recommendations below saves you the tideous hunt, installation, and setup. 
 
 Thanks to the multi-language feature, we can easily access the machine learning universe of Python. For example, <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/" target="_blank"><code>lib/py/ais/</code></a> contains a sample Tensorflow training script <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_train.py" target="_blank"><code>dnn_titanic_train.py</code></a>, and a script to deploy that DNN for usage <a href="https://github.com/kengz/aiva/tree/master/lib/py/ais/dnn_titanic_deploy.py" target="_blank"><code>dnn_titanic_deploy.py</code></a>. It is interfaced through <a href="https://github.com/kengz/aiva/tree/master/scripts/dnn_titanic.js" target="_blank"><code>scripts/dnn_titanic.js</code></a> that allows you to use run predictions.
 
@@ -112,9 +104,7 @@ The list of AI modules and their respective language:
 | [wordpos](https://github.com/moos/wordpos) | WordNet POS | Node.js |
 | [date.js](https://github.com/matthewmueller/date) | time-parsing | Node.js |
 
-These tools are put close together in a [polyglot environment](#polyglot), so you can start combining them in brand new ways. An example is the generic NLP parser <a href="https://github.com/kengz/aiva/blob/master/lib/js/gen_nlp.js" target="_blank"><code>lib/js/gen_nlp.js</code></a> for parsing user input into intent and functional arguments - it uses `date.js` and `spaCy`.
-
-For more in-depth details, see [modules](#modules). Also if find a great ML tool we should include, submit a Pull Request!
+These tools are put close together in a [polyglot environment](#polyglot), so you can start combining them in brand new ways. An example is the generic NLP parser for parsing user input into intent and functional arguments.
 
 
 ## <a name="theoretical"></a>theoretical power
